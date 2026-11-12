@@ -252,9 +252,14 @@ public class GaltonBoard : MonoBehaviour
         return layoutCenter + new Vector3(x, layoutTop - rows * spacingY, 0f);
     }
 
-    public Vector3 GetSpawnPosition()
+    public Vector3 GetSpawnPosition(float margin = 1f)
     {
-        return GetPinPosition(0, 0) + Vector3.up * 0.9f;
+        Vector3 firstPin = GetPinPosition(0, 0);
+        Camera camera = Camera.main;
+        if (camera == null) return firstPin + Vector3.up * (10f + margin);
+        Vector3 viewport = camera.WorldToViewportPoint(firstPin);
+        viewport.y = 1f;
+        return camera.ViewportToWorldPoint(viewport) + camera.transform.up * margin;
     }
 
     /// <summary>Combina el valor del tablero con las duplicaciones compradas.</summary>

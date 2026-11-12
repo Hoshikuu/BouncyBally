@@ -145,6 +145,8 @@ public class BallController : MonoBehaviour
         Vector3 start = transform.position;
         Vector3 control = (start + target) * 0.5f + Vector3.up * bounceHeight;
         float duration = Mathf.Max(0.01f, segmentDuration) / speed;
+        // La entrada desde fuera de pantalla conserva una velocidad de caída legible.
+        if (!bounce) duration *= Mathf.Max(1f, Vector3.Distance(start, target));
         float elapsed = 0f;
         while (elapsed < duration)
         {

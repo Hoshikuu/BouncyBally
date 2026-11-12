@@ -23,3 +23,9 @@ Se analizaron la sintaxis C#, el YAML de escena, las referencias locales, los en
 Sticky decide una vez por pin si repite: `repeatContactChance = 0.3` (30 %) permite tres contactos; en el resto hace uno. La probabilidad y el número de contactos están en `Sticky Behavior`. Los demás comportamientos conservan un contacto.
 
 Los slots tienen altura visible 0,48 unidades y ancho del 96 % del espaciado entre columnas. Se ajusta también la caja de texto. Ambos tamaños se editan en BouncyBallySettings y se mantienen al ampliar el tablero.
+
+## Entrada de bolas y giro manual
+
+El spawn se calcula por encima del borde superior de la cámara, con margen según el tamaño de la bola. La caída inicial hasta el primer pin aumenta su duración según la distancia de entrada.
+
+El panel de gambling muestra «Pulsa la ruleta para girar» y espera el clic en la rueda. El botón está guardado en la escena y enlazado al presentador. Al empezar se desactiva hasta la siguiente apuesta; la tanda sigue pendiente mientras se espera el clic y se resuelve el giro.

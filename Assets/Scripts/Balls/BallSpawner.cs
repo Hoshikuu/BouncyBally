@@ -99,7 +99,9 @@ public class BallSpawner : MonoBehaviour
                 cumulative += candidate.CustomBehavior.appearanceChance;
                 if (surprise < cumulative) { appearance = candidate; break; }
             }
-            BallController ball = Instantiate(appearance.Prefab, board.GetSpawnPosition(), Quaternion.identity);
+            float size = appearance.CustomBehavior != null ? appearance.CustomBehavior.sizeFactor : 1f;
+            float offscreenMargin = Mathf.Max(1f, economy.Settings.ballScale * size * 2f);
+            BallController ball = Instantiate(appearance.Prefab, board.GetSpawnPosition(offscreenMargin), Quaternion.identity);
             ball.Setup(board, this, value, speed, pin, slot, appearance, reward, id);
             if (i + 1 < count) yield return new WaitForSeconds(economy.Settings.spawnInterval);
         }
