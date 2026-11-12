@@ -497,7 +497,7 @@ public class GaltonEditorWindow : EditorWindow
                 Prerequisite = data.FindProperty("prerequisite").objectReferenceValue as SkillDefinition,
                 Targets = balls,
                 TargetKey = balls.Length == 0 ? "0:Global" : "1:" + string.Join("|", balls.Select(ball => StableKey(ball)).Distinct().OrderBy(key => key, StringComparer.Ordinal)),
-                Levels = EffectiveMaxLevel(skill)
+                Levels = skill.MaxLevel
             });
         }
         return nodes.OrderBy(node => node.Key, StringComparer.Ordinal).ToList();
