@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb42e2bb17c4758a934c363ca5c3bb4, type: 3}
+  m_Name: BouncyBallySettings
+  m_EditorClassIdentifier: Assembly-CSharp::BouncyBallySettings
+  gameTitle: Bouncy Bally
+  balls:
+  - {fileID: 11400000, guid: ea91270112ae49cb96522ac8ce891682, type: 2}
+  - {fileID: 11400000, guid: 81fa011be8144aab9d6d1fe947fe8916, type: 2}
+  - {fileID: 11400000, guid: d84634489a194280bca3211cca416e2b, type: 2}
+  - {fileID: 11400000, guid: 99ba487eea2d419f861e01d6769fbb5e, type: 2}
+  skills:
+  - {fileID: 11400000, guid: 73c628919455c0aaebf6a7f81710e4d2, type: 2}
+  - {fileID: 11400000, guid: 9d5f719e3ea28169680f9a3cb185a9ea, type: 2}
+  - {fileID: 11400000, guid: c066470712cb4b84ba2082a6c3be7bdc, type: 2}
+  - {fileID: 11400000, guid: 1b2f93e3e43d4043a633a2806a2da52e, type: 2}
+  - {fileID: 11400000, guid: 55724487d2a24611b1f3d2a3ef8970d0, type: 2}
+  - {fileID: 11400000, guid: 2d362001c7e543f1b7accd9becd22720, type: 2}
+  - {fileID: 11400000, guid: b7bff4970bd640bdb582fbdd3d347afd, type: 2}
+  - {fileID: 11400000, guid: 6deffe341bf484c6ea0f7675ebe701ee, type: 2}
+  - {fileID: 11400000, guid: a58fe913b3fd45b0a46d7b8d31d97fea, type: 2}
+  - {fileID: 11400000, guid: ada515f3f9754f4e9c9063f00b407515, type: 2}
+  - {fileID: 11400000, guid: f48f721d889943408341755a18aad60d, type: 2}
+  - {fileID: 11400000, guid: 228b70ba651b48bf9224da7f8aab2f7e, type: 2}
+  - {fileID: 11400000, guid: 2e82ca22cb7440dd8ff22a7318b47da9, type: 2}
+  modifiers:
+  - {fileID: 11400000, guid: e419ea9c6b274271abd4e9772dffe3a7, type: 2}
+  - {fileID: 11400000, guid: d4bd82301f31466687fe0286dda2ae0a, type: 2}
+  - {fileID: 11400000, guid: 3298c8c3f5bf464da0a82c35fd1d73db, type: 2}
+  - {fileID: 11400000, guid: 40be4a45e8e14af690206c63959247ee, type: 2}
+  - {fileID: 11400000, guid: e12e8affd77d46f68c06c11f79c1f057, type: 2}
+  - {fileID: 11400000, guid: f652bf5d00c84844969730dfc94c31ab, type: 2}
+  challenges: []
+  gachas: []
+  startingMoney: 0
+  startingRows: 6
+  boardWidth: 0.78
+  boardHeight: 0.84
+  pinScale: 0.45
+  ballScale: 0.28
+  segmentDuration: 0.34
+  spawnInterval: 0.11
+  payoutMultiplier: 1
+  maxActiveBalls: 250
+  rechargeDuringFlight: 1
+  graphSize: {x: 4600, y: 3400}
+  nodeSize: 170
+  minimumZoom: 0.18
+  maximumZoom: 2
+  openingZoom: 0.75
+  batchCardHeight: 112
+  textSize: 19
+  tuningStep: 0.05
+  tuningFirstCost: 50000
+  tuningExponent: 1.1
+  pulseDuration: 2
+  startingModuleSlots: 3
+  effectIntensity: 1.7
+  shakeDistance: 0.035
+  particleBudget: 900
