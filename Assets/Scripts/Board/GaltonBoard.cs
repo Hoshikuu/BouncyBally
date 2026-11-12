@@ -232,7 +232,10 @@ public class GaltonBoard : MonoBehaviour
             if (!visible)
                 continue;
             slotViews[column].transform.position = GetSlotPosition(column);
-            slotViews[column].Setup(GetMultiplier(column), colorPalette, spacingX * 0.88f);
+            var settings = BouncyBallySettings.Current;
+            slotViews[column].Setup(GetMultiplier(column), colorPalette,
+                spacingX * (settings != null ? settings.slotWidthRatio : .96f),
+                settings != null ? settings.slotHeight : .48f);
         }
     }
 

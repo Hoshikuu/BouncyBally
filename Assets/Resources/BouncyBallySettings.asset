@@ -76,6 +76,8 @@ MonoBehaviour:
   boardWidth: 0.78
   boardHeight: 0.84
   pinScale: 0.45
+  slotHeight: 0.48
+  slotWidthRatio: 0.96
   ballScale: 0.28
   segmentDuration: 0.34
   spawnInterval: 0.11

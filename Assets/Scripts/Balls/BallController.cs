@@ -71,7 +71,7 @@ public class BallController : MonoBehaviour
             chain = pin.Modifier != null ? chain + 1 : 0;
             double bonus = pin.MultiplierBonus + pinBonus;
             if (type.Rule == BallDefinition.BallRule.Alternating) bonus += alternations * type.RuleAmount;
-            int contacts = special != null ? special.Contacts : 1;
+            int contacts = special != null ? special.RollContacts() : 1;
             for (int contact = 0; contact < contacts; contact++)
             {
                 double appliedBonus = ball.AddPinBonus(pin.ResolveContactBonus(bonus,batchId,alternations,chain));

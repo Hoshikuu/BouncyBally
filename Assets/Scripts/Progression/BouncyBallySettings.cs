@@ -21,6 +21,8 @@ public class BouncyBallySettings : ScriptableObject
     [Range(.4f, .95f)] public float boardHeight = .84f;
     [Min(.1f)] public float pinScale = .45f;
     [Min(.1f)] public float ballScale = .28f;
+    public float slotHeight = .48f;
+    public float slotWidthRatio = .96f;
     [Min(.05f)] public float segmentDuration = .34f;
     [Min(0)] public float spawnInterval = .11f;
     [Range(0.01f, 2f)] public float payoutMultiplier = .65f;

@@ -11,7 +11,7 @@ public class BallSpecial : BallBase
     public float SpeedFactor => behavior == null ? 1 : behavior.speedFactor + variation;
     public float SizeFactor => behavior == null ? 1 : behavior.sizeFactor;
     public float BounceFactor => behavior == null ? 1 : behavior.bounceFactor;
-    public int Contacts => behavior == null ? 1 : behavior.contacts;
+    public int RollContacts() => behavior == null ? 1 : behavior.ContactCount(Random.value);
     public override void Setup(double value, GaltonColors colors)
     {
         touched = 0;

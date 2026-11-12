@@ -17,3 +17,9 @@ Se eliminaron los scripts de checks, el panel Validate, sus botones, los validad
 ## Verificación del entorno
 
 Se analizaron la sintaxis C#, el YAML de escena, las referencias locales, los enlaces a comportamientos, las skills y la distribución de sectores. El entorno no dispone del editor Unity: compilación, animación y aspecto visual requieren comprobación en el editor.
+
+## Sticky y tamaño de slots
+
+Sticky decide una vez por pin si repite: `repeatContactChance = 0.3` (30 %) permite tres contactos; en el resto hace uno. La probabilidad y el número de contactos están en `Sticky Behavior`. Los demás comportamientos conservan un contacto.
+
+Los slots tienen altura visible 0,48 unidades y ancho del 96 % del espaciado entre columnas. Se ajusta también la caja de texto. Ambos tamaños se editan en BouncyBallySettings y se mantienen al ampliar el tablero.
