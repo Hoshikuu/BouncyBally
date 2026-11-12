@@ -17,10 +17,11 @@ MonoBehaviour:
   title: Beach Ball
   description: Beach ball behaviour.
   prefab: {fileID: 5264840048297102225, guid: 18350b938ef342e4b1e6b44f78f5a04d, type: 3}
-  startsUnlocked: 1
+  startsUnlocked: 0
   startingValue: 1
   startingCount: 1
   startingSpeed: 1
   batchCooldown: 3.25
   displayColor: {r: 1, g: 0.45, b: 0.3, a: 1}
   symbol: B
+  customBehavior: {fileID: 11400000, guid: 18df80bde6c0459786ef94f09d66b632, type: 2}

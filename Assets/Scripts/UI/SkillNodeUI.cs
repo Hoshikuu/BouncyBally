@@ -14,7 +14,6 @@ public class SkillNodeUI : MonoBehaviour, IPointerClickHandler
     public SkillDefinition Skill => skill;
     public RectTransform Rect => transform as RectTransform;
 
-    private bool valid;
     public bool HasSceneReferences => skill != null && button != null && background != null && icon != null &&
         symbolText != null && statusText != null && GetComponent<CanvasRenderer>() != null;
     public void Configure(SkillDefinition definition, SkillTreeController controller)
@@ -24,8 +23,6 @@ public class SkillNodeUI : MonoBehaviour, IPointerClickHandler
     }
     public void Bind(SkillTreeController controller)
     {
-        valid = HasSceneReferences;
-        if (!valid) { Debug.LogError("Skill node has missing scene references.", this); return; }
         owner = controller;
         button.onClick.RemoveListener(Select);
         button.onClick.AddListener(Select);
@@ -47,7 +44,6 @@ public class SkillNodeUI : MonoBehaviour, IPointerClickHandler
     }
     public void Refresh(SkillTreeController controller, bool selected)
     {
-        if (!valid || !HasSceneReferences || controller == null) return;
         bool unlocked = controller.GetLevel(skill) > 0 || controller.MeetsRequirement(skill);
         bool complete = controller.IsComplete(skill);
         bool affordable = controller.CanBuy(skill);

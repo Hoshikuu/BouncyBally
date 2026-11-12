@@ -17,10 +17,11 @@ MonoBehaviour:
   title: Sticky Ball
   description: Sticky ball behaviour.
   prefab: {fileID: 5264840048297102225, guid: b1b5b05c991d478e89c65a0f4d2f893f, type: 3}
-  startsUnlocked: 1
+  startsUnlocked: 0
   startingValue: 1
   startingCount: 1
   startingSpeed: 1
   batchCooldown: 3.25
   displayColor: {r: 0.3, g: 0.9, b: 0.3, a: 1}
   symbol: B
+  customBehavior: {fileID: 11400000, guid: 12fb51aa8536409e828e6c66142827ca, type: 2}

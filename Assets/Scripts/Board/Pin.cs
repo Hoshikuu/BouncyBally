@@ -158,22 +158,7 @@ public class Pin : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IP
         RefreshColor();
     }
 
-    private void OnValidate()
-    {
-        NormalizeTuning();
-        multiplierBonus = Mathf.Max(0f, multiplierBonus);
-        bonusPerLevel = Mathf.Max(0f, bonusPerLevel);
-        initialUpgradeCost = Mathf.Max(1f, initialUpgradeCost);
-        upgradeCostMultiplier = Mathf.Max(1f, upgradeCostMultiplier);
-        level = Mathf.Max(0, level);
 
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-
-        RefreshColor();
-    }
 
     /// <summary>Sortea la dirección según la probabilidad configurada.</summary>
     public bool GoesRight()

@@ -17,10 +17,11 @@ MonoBehaviour:
   title: Gambler Ball
   description: Gambler ball behaviour.
   prefab: {fileID: 5264840048297102225, guid: b0095af6895a4fc19b16a236fa8a196e, type: 3}
-  startsUnlocked: 1
+  startsUnlocked: 0
   startingValue: 1
   startingCount: 1
   startingSpeed: 1
   batchCooldown: 3.25
   displayColor: {r: 0.9, g: 0.1, b: 0.2, a: 1}
   symbol: B
+  customBehavior: {fileID: 11400000, guid: 3bdbad2e031142a1b826cd1613bc38ee, type: 2}

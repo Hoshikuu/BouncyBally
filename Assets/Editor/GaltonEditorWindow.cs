@@ -36,25 +36,17 @@ public class GaltonEditorWindow : EditorWindow
         public Vector2 Position;
     }
 
-    private sealed class Issue
-    {
-        public Object Asset;
-        public string Text;
-        public bool Warning;
-    }
 
     [SerializeField] private int tab;
     [SerializeField] private Object selected;
     [SerializeField] private Vector2 graphScroll;
     [SerializeField] private float zoom = .75f;
     [SerializeField] private bool snap;
-    private Vector2 listScroll, inspectorScroll, validationScroll;
+    private Vector2 listScroll, inspectorScroll;
     private string newName = "New Ball", search = "";
     private BouncyBallySettings settings;
     private UnityEditor.Editor sceneInspector;
     private readonly Dictionary<Type, Object[]> assetCache = new Dictionary<Type, Object[]>();
-    private readonly List<Issue> issues = new List<Issue>();
-    private bool validationVisible;
     private SkillDefinition dragging, connectChild;
     private Vector2 dragOffset;
     private int dragUndoGroup = -1, dragControl;
@@ -132,7 +124,6 @@ public class GaltonEditorWindow : EditorWindow
                 GUILayout.Label("Bouncy Bally Editor", EditorStyles.boldLabel);
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button("Sync catalogs", EditorStyles.toolbarButton)) SyncCatalogs();
-                if (GUILayout.Button("Validate", EditorStyles.toolbarButton)) Validate();
                 if (GUILayout.Button("Save assets", EditorStyles.toolbarButton)) AssetDatabase.SaveAssets();
             }
             int next = GUILayout.SelectionGrid(tab, Tabs, position.width < 1200 ? 5 : 10, EditorStyles.toolbarButton);
@@ -153,7 +144,6 @@ public class GaltonEditorWindow : EditorWindow
                     if (GUILayout.Button("Cancel pending link")) GaltonScriptTemplates.CancelPending();
                 }
             }
-            DrawValidation();
             if (tab == 0) DrawSettings();
             else if (tab == 3) DrawTree();
             else if (tab == 8) DrawScene();
@@ -288,12 +278,7 @@ public class GaltonEditorWindow : EditorWindow
                     SkillDefinition candidate = property.objectReferenceValue as SkillDefinition;
                     if (candidate != previous)
                     {
-                        if (!ValidPrerequisite(skill, candidate, out string reason))
-                        {
-                            property.objectReferenceValue = previous;
-                            ShowNotification(new GUIContent(reason));
-                        }
-                        else data.FindProperty("prerequisiteLevel").intValue = candidate == null ? 1 :
+                        data.FindProperty("prerequisiteLevel").intValue = candidate == null ? 1 :
                             Mathf.Clamp(data.FindProperty("prerequisiteLevel").intValue, 1, candidate.MaxLevel);
                     }
                 }
@@ -324,6 +309,13 @@ public class GaltonEditorWindow : EditorWindow
         if (!(asset is BallDefinition) && !(asset is SkillDefinition)) return;
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Optional custom behavior", EditorStyles.boldLabel);
+        if (asset is BallDefinition ball && ball.CustomBehavior != null)
+        {
+            var editor = UnityEditor.Editor.CreateEditor(ball.CustomBehavior);
+            editor.OnInspectorGUI();
+            Object.DestroyImmediate(editor);
+        }
+
         using (new EditorGUI.DisabledScope(GaltonScriptTemplates.HasPending))
             if (GUILayout.Button(asset is BallDefinition ? "Create custom ball script" : "Create custom skill script"))
                 GaltonScriptTemplates.Generate(asset, asset is BallDefinition);
@@ -451,11 +443,7 @@ public class GaltonEditorWindow : EditorWindow
         if (!EnsureSettings()) return false;
         BallDefinition[] balls = FindAssets(typeof(BallDefinition)).Cast<BallDefinition>().ToArray();
         GaltonSceneBuilder.CreateMissingBallChoices(balls);
-        if (!GaltonSceneBuilder.CanSyncBallCatalog(settings, balls, out string reason))
-        {
-            EditorUtility.DisplayDialog("Ball catalog not synced", reason, "OK");
-            return false;
-        }
+
         var data = new SerializedObject(settings);
         data.Update();
         // Todos los arrays de referencias, incluidos futuros catálogos del modelo.
@@ -748,22 +736,9 @@ public class GaltonEditorWindow : EditorWindow
         return false;
     }
 
-    private bool ValidPrerequisite(SkillDefinition skill, SkillDefinition candidate, out string reason)
-    {
-        reason = "";
-        if (candidate == null) return true;
-        if (HasCycle(skill, candidate)) reason = "This prerequisite creates or reaches a cycle.";
-        else if (!Registered(typeof(SkillDefinition)).Contains(candidate)) reason = "Sync catalogs before using this prerequisite.";
-        return reason.Length == 0;
-    }
-
     private bool SetPrerequisite(SkillDefinition skill, SkillDefinition candidate)
     {
-        if (!ValidPrerequisite(skill, candidate, out string reason))
-        {
-            ShowNotification(new GUIContent(reason));
-            return false;
-        }
+
         var data = new SerializedObject(skill);
         data.FindProperty("prerequisite").objectReferenceValue = candidate;
         var level = data.FindProperty("prerequisiteLevel");
@@ -925,263 +900,6 @@ public class GaltonEditorWindow : EditorWindow
                 if (pair.Key != null && new SerializedObject(pair.Key).FindProperty("position").vector2Value != pair.Value) SetPosition(pair.Key, pair.Value);
             AssetDatabase.SaveAssets();
             Refresh();
-        }
-    }
-
-    private void DrawValidation()
-    {
-        if (!validationVisible) return;
-        using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
-        {
-            using (new EditorGUILayout.HorizontalScope())
-            {
-                int errors = issues.Count(issue => !issue.Warning);
-                EditorGUILayout.LabelField(errors + " errors, " + (issues.Count - errors) + " warnings", EditorStyles.boldLabel);
-                if (GUILayout.Button("Close", GUILayout.Width(55))) validationVisible = false;
-            }
-            if (issues.Count == 0) EditorGUILayout.LabelField("No configuration issues found.");
-            else using (var scroll = new EditorGUILayout.ScrollViewScope(validationScroll, GUILayout.MaxHeight(150)))
-            {
-                validationScroll = scroll.scrollPosition;
-                foreach (Issue issue in issues)
-                    using (new EditorGUILayout.HorizontalScope())
-                    {
-                        EditorGUILayout.LabelField((issue.Warning ? "Warning: " : "Error: ") + issue.Text, EditorStyles.wordWrappedLabel);
-                        if (issue.Asset != null && GUILayout.Button("Ping", GUILayout.Width(45))) EditorGUIUtility.PingObject(issue.Asset);
-                    }
-            }
-        }
-    }
-
-    private void AddIssue(Object asset, string text, bool warning = false)
-    {
-        issues.Add(new Issue { Asset = asset, Text = (asset != null ? asset.name + ": " : "") + text, Warning = warning });
-    }
-
-    private void Validate()
-    {
-        Refresh();
-        issues.Clear();
-        validationVisible = true;
-        validationScroll = Vector2.zero;
-        if (settings == null) AddIssue(null, "Missing " + SettingsPath + ". Use Sync catalogs.");
-        foreach (BouncyBallySettings asset in FindAssets(typeof(BouncyBallySettings)))
-        {
-            string path = AssetDatabase.GetAssetPath(asset);
-            if (asset != settings && path.EndsWith("/Resources/BouncyBallySettings.asset", StringComparison.Ordinal))
-                AddIssue(asset, "Duplicate Resources settings name. Keep one runtime settings asset.");
-        }
-        var ids = new Dictionary<string, Object>(StringComparer.Ordinal);
-        foreach (Catalog catalog in Catalogs)
-        {
-            foreach (Object asset in FindAssets(catalog.Type))
-            {
-                var data = new SerializedObject(asset);
-                SerializedProperty id = data.FindProperty("id");
-                if (id != null)
-                {
-                    if (string.IsNullOrWhiteSpace(id.stringValue)) AddIssue(asset, "Missing stable ID.");
-                    else if (ids.TryGetValue(id.stringValue, out Object previous)) AddIssue(asset, "Duplicate ID '" + id.stringValue + "' also used by " + AssetDatabase.GetAssetPath(previous) + ".");
-                    else ids.Add(id.stringValue, asset);
-                }
-                ValidateNumbers(asset, data);
-                ValidateMissingReferences(asset, data);
-            }
-        }
-        if (settings != null) ValidateSettings();
-        ValidateDefinitions();
-        foreach(string issue in GaltonSceneBuilder.SceneIssues()) AddIssue(null,issue);
-        ValidateProgressionViews();
-        foreach (Type type in SceneTypes)
-        {
-            Component[] components = SceneComponents(type);
-            if (components.Length == 0) AddIssue(null, "No " + type.Name + " in loaded scenes.", true);
-            foreach (Component component in components)
-            {
-                var data = new SerializedObject(component);
-                ValidateNumbers(component, data);
-                ValidateMissingReferences(component, data);
-            }
-        }
-        Repaint();
-        ShowNotification(new GUIContent(issues.Count == 0 ? "Validation passed" : issues.Count + " configuration issues"));
-    }
-
-    private void ValidateProgressionViews()
-    {
-        ProgressionUI view = GaltonSceneBuilder.FindInScene<ProgressionUI>();
-        if (view == null) return;
-        var data = new SerializedObject(view);
-        foreach (var mapping in new[] { new { Field = "rows", Item = "goal", Type = typeof(ChallengeDefinition) },
-                                          new { Field = "boxes", Item = "box", Type = typeof(GachaDefinition) } })
-        {
-            SerializedProperty rows = data.FindProperty(mapping.Field);
-            if (rows == null) continue;
-            var represented = new HashSet<Object>();
-            for (int i = 0; i < rows.arraySize; i++)
-            {
-                SerializedProperty row = rows.GetArrayElementAtIndex(i);
-                string[] fields = mapping.Field == "rows" ? new[] { "goal", "label", "claim", "claimLabel" } :
-                    new[] { "box", "label", "odds", "open", "openLabel" };
-                if (fields.All(field => row.FindPropertyRelative(field) != null && row.FindPropertyRelative(field).objectReferenceValue != null))
-                    represented.Add(row.FindPropertyRelative(mapping.Item).objectReferenceValue);
-            }
-            foreach (Object asset in Registered(mapping.Type).Where(item => item != null && !represented.Contains(item)))
-                AddIssue(asset, "No complete ProgressionUI " + mapping.Field + " entry; create and assign a scene view.", true);
-        }
-    }
-
-    private void ValidateSettings()
-    {
-        var data = new SerializedObject(settings);
-        ValidateNumbers(settings, data);
-        ValidateMissingReferences(settings, data);
-        SerializedProperty property = data.GetIterator();
-        bool enter = true;
-        while (property.NextVisible(enter))
-        {
-            enter = false;
-            if (!property.isArray || property.propertyType == SerializedPropertyType.String) continue;
-            Type type = CatalogType(property);
-            if (type == null) continue;
-            var entries = Enumerable.Range(0, property.arraySize).Select(i => property.GetArrayElementAtIndex(i).objectReferenceValue).ToArray();
-            if (entries.Any(entry => entry == null)) AddIssue(settings, property.displayName + " contains missing entries.");
-            if (entries.Where(entry => entry != null).Distinct().Count() != entries.Count(entry => entry != null)) AddIssue(settings, property.displayName + " contains duplicate entries.");
-            if (!new HashSet<Object>(entries.Where(entry => entry != null)).SetEquals(FindAssets(type))) AddIssue(settings, property.displayName + " is out of sync. Use Sync catalogs.");
-        }
-        Vector2 size = data.FindProperty("graphSize").vector2Value;
-        if (!Finite(size.x) || !Finite(size.y) || size.x <= 0 || size.y <= 0) AddIssue(settings, "Graph size must be finite and positive.");
-        float low = data.FindProperty("minimumZoom").floatValue, high = data.FindProperty("maximumZoom").floatValue, opening = data.FindProperty("openingZoom").floatValue;
-        if (low <= 0 || high < low || opening < low || opening > high) AddIssue(settings, "Invalid zoom limits or opening zoom.");
-    }
-
-    private void ValidateDefinitions()
-    {
-        var balls = new HashSet<Object>(Registered(typeof(BallDefinition)).Where(asset => asset != null));
-        var skills = new HashSet<Object>(Registered(typeof(SkillDefinition)).Where(asset => asset != null));
-        var modifiers = new HashSet<Object>(Registered(typeof(PinModifierDefinition)).Where(asset => asset != null));
-        Object[] allSkills = FindAssets(typeof(SkillDefinition)), rewards = FindAssets(typeof(RewardDefinition));
-        var containedRewards = new HashSet<Object>();
-        if (balls.Count == 0) AddIssue(settings, "No balls in the settings catalog.");
-        if (skills.Count == 0) AddIssue(settings, "No skills in the settings catalog.", true);
-        foreach (SkillDefinition skill in allSkills)
-        {
-            var data = new SerializedObject(skill);
-            SkillDefinition prerequisite = data.FindProperty("prerequisite").objectReferenceValue as SkillDefinition;
-            int effect = data.FindProperty("effect").intValue;
-            if (HasCycle(skill, prerequisite)) AddIssue(skill, "Prerequisite cycle.");
-            if (prerequisite != null && !skills.Contains(prerequisite)) AddIssue(skill, "Prerequisite is outside the settings catalog.");
-            int required = data.FindProperty("prerequisiteLevel").intValue;
-            if (required < 1 || (prerequisite != null && required > EffectiveMaxLevel(prerequisite))) AddIssue(skill, "Unreachable prerequisite level.");
-            SerializedProperty targets = data.FindProperty("targetBalls");
-            var seen = new HashSet<Object>();
-            for (int i = 0; i < targets.arraySize; i++)
-            {
-                Object target = targets.GetArrayElementAtIndex(i).objectReferenceValue;
-                if (target == null || !balls.Contains(target)) AddIssue(skill, "Target ball is missing or outside the settings catalog.");
-                else if (!seen.Add(target)) AddIssue(skill, "Duplicate target ball.");
-            }
-            if ((effect == (int)SkillEffect.BoardRows || effect == (int)SkillEffect.SlotMultiplier) && targets.arraySize > 0) AddIssue(skill, "Board effects must have no target balls.");
-            if (effect == (int)SkillEffect.UnlockBall)
-            {
-                Object ball = data.FindProperty("unlockBall").objectReferenceValue;
-                if (ball == null || !balls.Contains(ball)) AddIssue(skill, "Unlock ball is missing or outside the settings catalog.");
-            }
-            if (effect == (int)SkillEffect.Custom && data.FindProperty("customAction").objectReferenceValue == null) AddIssue(skill, "Custom effect needs an action asset.");
-            Vector2 position = data.FindProperty("position").vector2Value;
-            if (!Finite(position.x) || !Finite(position.y) || position.x < 0 || position.x > 1 || position.y < 0 || position.y > 1) AddIssue(skill, "Position must be normalized between 0 and 1.");
-            double cost = data.FindProperty("firstCost").doubleValue, growth = data.FindProperty("costGrowth").doubleValue;
-            if (!Finite(cost * Math.Pow(growth, EffectiveMaxLevel(skill) - 1))) AddIssue(skill, "Cost overflows before the final level.");
-        }
-        foreach (BallDefinition ball in FindAssets(typeof(BallDefinition)))
-        {
-            var data = new SerializedObject(ball);
-            BallController prefab = data.FindProperty("prefab").objectReferenceValue as BallController;
-            if (prefab == null || !PrefabUtility.IsPartOfPrefabAsset(prefab) || prefab.GetComponent<BallBase>() == null) AddIssue(ball, "Missing saved prefab with BallController and BallBase.");
-            if (!data.FindProperty("startsUnlocked").boolValue && !allSkills.Any(skill => {
-                var source = new SerializedObject(skill);
-                return skills.Contains(skill) && source.FindProperty("effect").intValue == (int)SkillEffect.UnlockBall && source.FindProperty("unlockBall").objectReferenceValue == ball;
-            }) && !rewards.Any(reward => {
-                var source = new SerializedObject(reward);
-                return source.FindProperty("effect").intValue == (int)CollectionRewardEffect.UnlockBall && source.FindProperty("ball").objectReferenceValue == ball;
-            })) AddIssue(ball, "No starting unlock, unlock skill, or unlock reward.", true);
-        }
-        foreach (GachaDefinition gacha in FindAssets(typeof(GachaDefinition)))
-        {
-            var data = new SerializedObject(gacha);
-            CheckRequiredSkill(gacha, data, skills);
-            SerializedProperty entries = data.FindProperty("rewards");
-            var seen = new HashSet<Object>();
-            double totalWeight = 0;
-            if (entries.arraySize == 0) AddIssue(gacha, "No rewards.");
-            for (int i = 0; i < entries.arraySize; i++)
-            {
-                Object reward = entries.GetArrayElementAtIndex(i).objectReferenceValue;
-                if (reward == null || !rewards.Contains(reward)) { AddIssue(gacha, "Missing reward asset."); continue; }
-                if (!seen.Add(reward)) AddIssue(gacha, "Duplicate reward entry.");
-                containedRewards.Add(reward);
-                totalWeight += new SerializedObject(reward).FindProperty("weight").doubleValue;
-            }
-            if (!Finite(totalWeight) || totalWeight <= 0) AddIssue(gacha, "Reward weights need a finite positive total.");
-        }
-        foreach (Object reward in rewards)
-        {
-            var data = new SerializedObject(reward);
-            int effect = data.FindProperty("effect").intValue;
-            if (effect == (int)CollectionRewardEffect.Modifier)
-            {
-                Object modifier = data.FindProperty("modifier").objectReferenceValue;
-                if (modifier == null || !modifiers.Contains(modifier)) AddIssue(reward, "Modifier reward needs a modifier in the settings catalog.");
-            }
-            Object ball = data.FindProperty("ball").objectReferenceValue;
-            if (effect == (int)CollectionRewardEffect.UnlockBall && ball == null) AddIssue(reward, "Unlock reward needs a ball.");
-            if (ball != null && !balls.Contains(ball)) AddIssue(reward, "Reward ball is outside the settings catalog.");
-            if (!containedRewards.Contains(reward)) AddIssue(reward, "Not assigned to any gacha.", true);
-        }
-        foreach (Object asset in FindAssets(typeof(ChallengeDefinition))) CheckRequiredSkill(asset, new SerializedObject(asset), skills);
-        if (balls.Count > 0 && !balls.Any(ball => new SerializedObject(ball).FindProperty("startsUnlocked").boolValue)) AddIssue(settings, "At least one catalog ball must start unlocked.");
-    }
-
-    private void CheckRequiredSkill(Object asset, SerializedObject data, HashSet<Object> skills)
-    {
-        Object required = data.FindProperty("requiredSkill").objectReferenceValue;
-        if (required != null && !skills.Contains(required)) AddIssue(asset, "Required skill is outside the settings catalog.");
-    }
-
-    private static int EffectiveMaxLevel(SkillDefinition skill)
-    {
-        var data = new SerializedObject(skill);
-        int effect = data.FindProperty("effect").intValue;
-        return effect == (int)SkillEffect.UnlockBall || effect == (int)SkillEffect.AutoLaunch || effect >= (int)SkillEffect.PinTweaker
-            ? 1 : data.FindProperty("maxLevel").intValue;
-    }
-
-    private void ValidateMissingReferences(Object asset, SerializedObject data)
-    {
-        SerializedProperty property = data.GetIterator();
-        while (property.NextVisible(true))
-            if (property.propertyType == SerializedPropertyType.ObjectReference && property.objectReferenceValue == null && property.objectReferenceInstanceIDValue != 0)
-                AddIssue(asset, "Missing reference: " + property.propertyPath + ".");
-    }
-
-    private void ValidateNumbers(Object asset, SerializedObject data)
-    {
-        SerializedProperty property = data.GetIterator();
-        while (property.NextVisible(true))
-        {
-            bool numeric = property.propertyType == SerializedPropertyType.Float || property.propertyType == SerializedPropertyType.Integer;
-            if (property.propertyType == SerializedPropertyType.Enum && property.enumValueIndex < 0) AddIssue(asset, "Invalid effect or metric: " + property.propertyPath + ".");
-            if (!numeric) continue;
-            double value = property.propertyType == SerializedPropertyType.Float ? property.doubleValue : property.longValue;
-            if (!Finite(value)) { AddIssue(asset, property.propertyPath + " must be finite (no NaN or Infinity)."); continue; }
-            // Los atributos del modelo son la fuente de límites para todos los campos de balance.
-            System.Reflection.FieldInfo field = asset.GetType().GetField(property.name,
-                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
-            if (field == null) continue;
-            var min = Attribute.GetCustomAttribute(field, typeof(MinAttribute)) as MinAttribute;
-            var range = Attribute.GetCustomAttribute(field, typeof(RangeAttribute)) as RangeAttribute;
-            if (min != null && value < min.min) AddIssue(asset, property.propertyPath + " must be at least " + min.min + ".");
-            if (range != null && (value < range.min || value > range.max)) AddIssue(asset, property.propertyPath + " must be between " + range.min + " and " + range.max + ".");
         }
     }
 

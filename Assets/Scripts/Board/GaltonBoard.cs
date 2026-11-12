@@ -52,14 +52,6 @@ public class GaltonBoard : MonoBehaviour
 
     private void Start()
     {
-        if (pinPrefab == null || slotViews == null || slotViews.Length < MaxRows + 1 ||
-            Array.Exists(slotViews, slot => slot == null))
-        {
-            Debug.LogError("GaltonBoard needs a pin prefab and nine scene slots.", this);
-            enabled = false;
-            return;
-        }
-
         UpdateLayout();
         AddMissingRows();
         RefreshSlots();

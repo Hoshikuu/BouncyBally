@@ -11,7 +11,6 @@ public class BallController : MonoBehaviour
     [Header("Movimiento")]
     [Min(0.01f)] [SerializeField] private float segmentDuration = 0.3f;
     [Min(0f)] [SerializeField] private float bounceHeight = 0.55f;
-    [SerializeField] private float pinContactOffset = 0.25f;
     private GaltonBoard board;
     private BallSpawner spawner;
     internal BallSpawner Owner => spawner;
@@ -48,8 +47,9 @@ public class BallController : MonoBehaviour
         visuals = GetComponent<BallVisualEffects>();
         effects = board.GetComponent<GaltonEffects>();
         ball.SetIdentityColor(definition != null ? definition.DisplayColor : Color.white);
-        ball.Setup(value, board.Colors);
         special = ball as BallSpecial;
+        if (special != null) special.Configure(definition.CustomBehavior);
+        ball.Setup(value, board.Colors);
         if (special != null)
         { speed *= special.SpeedFactor; transform.localScale *= special.SizeFactor; bounceHeight *= special.BounceFactor; }
         StartCoroutine(Traverse());
@@ -134,7 +134,9 @@ public class BallController : MonoBehaviour
 
     private Vector3 PinContact(int row, int column)
     {
-        return board.GetPinPosition(row, column) + Vector3.up * pinContactOffset;
+        var pin = board.GetPin(row, column);
+        var renderer = pin.GetComponent<SpriteRenderer>();
+        return new Vector3(renderer.bounds.center.x, renderer.bounds.max.y + GetComponent<SpriteRenderer>().bounds.extents.y, pin.transform.position.z);
     }
 
     /// <summary>Interpola en línea recta o en una curva de Bézier con el centro elevado.</summary>

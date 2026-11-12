@@ -4,6 +4,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Bouncy Bally/Ball")]
 public class BallDefinition : ScriptableObject
 {
+    [SerializeField] private BallBehaviour customBehavior;
+    public BallBehaviour CustomBehavior => customBehavior;
+    public bool RandomOnly => customBehavior != null && customBehavior.randomOnly;
+
     public enum BallRule { Standard, Alternating, Pulse }
     [SerializeField] private BallRule rule;
     [Min(0)] [SerializeField] private float ruleAmount = .25f;

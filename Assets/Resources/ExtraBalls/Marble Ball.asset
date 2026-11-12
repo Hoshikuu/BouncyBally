@@ -17,10 +17,11 @@ MonoBehaviour:
   title: Marble Ball
   description: Marble ball behaviour.
   prefab: {fileID: 5264840048297102225, guid: 925046a42f984f5ba21c3e67b1338677, type: 3}
-  startsUnlocked: 1
+  startsUnlocked: 0
   startingValue: 1
   startingCount: 1
   startingSpeed: 1
   batchCooldown: 3.25
   displayColor: {r: 0.9, g: 0.4, b: 0.8, a: 1}
   symbol: B
+  customBehavior: {fileID: 11400000, guid: d59bc5c16c754c04bdfe783cd579c7ad, type: 2}

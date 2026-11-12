@@ -17,10 +17,11 @@ MonoBehaviour:
   title: Chemical Ball
   description: Chemical ball behaviour.
   prefab: {fileID: 5264840048297102225, guid: a0bd0648ad5640aaa3e32d9e751e2ed1, type: 3}
-  startsUnlocked: 1
+  startsUnlocked: 0
   startingValue: 1
   startingCount: 1
   startingSpeed: 1
   batchCooldown: 3.25
   displayColor: {r: 0.4, g: 1, b: 0.1, a: 1}
   symbol: B
+  customBehavior: {fileID: 11400000, guid: 0d98a424471740a799d778654a424c6c, type: 2}

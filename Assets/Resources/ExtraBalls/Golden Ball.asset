@@ -17,10 +17,11 @@ MonoBehaviour:
   title: Golden Ball
   description: Golden ball behaviour.
   prefab: {fileID: 5264840048297102225, guid: dff60916b9574da8a113180200840c2a, type: 3}
-  startsUnlocked: 1
+  startsUnlocked: 0
   startingValue: 1
   startingCount: 1
   startingSpeed: 1
   batchCooldown: 3.25
   displayColor: {r: 1, g: 0.8, b: 0.05, a: 1}
   symbol: B
+  customBehavior: {fileID: 11400000, guid: 9233928e16604f15922e24480d3f0704, type: 2}

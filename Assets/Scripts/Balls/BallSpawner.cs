@@ -56,7 +56,7 @@ public class BallSpawner : MonoBehaviour
     /// <summary>Solo permite asignaciones del catálogo, desbloqueadas y con la tanda en reposo.</summary>
     public bool AssignBall(int index, BallDefinition type)
     {
-        if (!IsBatchUnlocked(index) || type == null || !economy.IsBallUnlocked(type) || states[index].Phase != BallBatchPhase.Ready) return false;
+        if (!IsBatchUnlocked(index) || type == null || type.RandomOnly || !economy.IsBallUnlocked(type) || states[index].Phase != BallBatchPhase.Ready) return false;
         bool found = false;
         foreach (BallDefinition entry in Balls) if (entry == type) { found = true; break; }
         if (!found) return false;
@@ -92,9 +92,13 @@ public class BallSpawner : MonoBehaviour
             BallDefinition appearance = type;
             // Las variantes sorpresa conservan el valor y la tanda de origen.
             float surprise = Random.value;
-            string replacement = surprise < .01f ? "Golden Ball" : surprise < .03f ? "Constructor Ball" : null;
-            if (replacement != null)
-                foreach (var candidate in Balls) if (candidate.name == replacement) { appearance = candidate; break; }
+            float cumulative = 0;
+            foreach (var candidate in Balls)
+            {
+                if (!candidate.RandomOnly || !economy.IsBallUnlocked(candidate)) continue;
+                cumulative += candidate.CustomBehavior.appearanceChance;
+                if (surprise < cumulative) { appearance = candidate; break; }
+            }
             BallController ball = Instantiate(appearance.Prefab, board.GetSpawnPosition(), Quaternion.identity);
             ball.Setup(board, this, value, speed, pin, slot, appearance, reward, id);
             if (i + 1 < count) yield return new WaitForSeconds(economy.Settings.spawnInterval);

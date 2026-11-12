@@ -32,9 +32,6 @@ public class BatchConfigurationUI : MonoBehaviour
     public bool Initialize()
     {
         if (initialized) return true;
-        if (game == null || spawner == null || root == null || openButton == null || closeButton == null || hint == null || slots == null || slots.Length != BallSpawner.MaxBatches || choices == null || choices.Length != game.Settings.balls.Length) return false;
-        foreach (BatchSlot slot in slots) if (slot == null || slot.button == null || slot.label == null || slot.identity == null) return false;
-        foreach (BallChoice choice in choices) if (choice == null || choice.ball == null || choice.button == null || choice.label == null || choice.identity == null) return false;
         for (int i = 0; i < slots.Length; i++) { int index = i; slots[i].button.onClick.AddListener(() => { selected = index; Refresh(); }); }
         foreach (BallChoice choice in choices) { BallDefinition ball = choice.ball; choice.button.onClick.AddListener(() => { spawner.AssignBall(selected, ball); Refresh(); }); }
         openButton.onClick.AddListener(Open); closeButton.onClick.AddListener(Close);

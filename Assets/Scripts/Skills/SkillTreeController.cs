@@ -32,13 +32,6 @@ public class SkillTreeController : MonoBehaviour
     public bool Initialize()
     {
         if (initialized) return true;
-        if (game == null || window == null || graph == null || viewport == null || drag == null || connections == null ||
-            connections.GetComponent<CanvasRenderer>() == null || nodeViews == null || closeButton == null || fitButton == null ||
-            buyButton == null || title == null || description == null || price == null)
-        { Debug.LogError("Skill tree has missing scene references.",this); return false; }
-        foreach (SkillNodeUI node in nodeViews)
-            if (node == null || !node.HasSceneReferences)
-            { Debug.LogError("Skill tree contains an incomplete scene node.",this); return false; }
         foreach (SkillNodeUI node in nodeViews) node.Bind(this);
         ApplyNodePositions();
         connections.SetNodes(nodeViews);

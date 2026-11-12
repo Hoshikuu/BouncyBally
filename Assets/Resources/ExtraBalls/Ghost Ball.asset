@@ -17,10 +17,11 @@ MonoBehaviour:
   title: Ghost Ball
   description: Ghost ball behaviour.
   prefab: {fileID: 5264840048297102225, guid: d21328d96b0847f9961a4593a135c5b7, type: 3}
-  startsUnlocked: 1
+  startsUnlocked: 0
   startingValue: 1
   startingCount: 1
   startingSpeed: 1
   batchCooldown: 3.25
   displayColor: {r: 0.7, g: 0.9, b: 1, a: 1}
   symbol: B
+  customBehavior: {fileID: 11400000, guid: f639ae7d0d264db6a1789325f41c2d26, type: 2}

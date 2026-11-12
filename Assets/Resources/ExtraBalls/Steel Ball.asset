@@ -17,10 +17,11 @@ MonoBehaviour:
   title: Steel Ball
   description: Steel ball behaviour.
   prefab: {fileID: 5264840048297102225, guid: 463f0a8ad13c40a1a5deb97afb069698, type: 3}
-  startsUnlocked: 1
+  startsUnlocked: 0
   startingValue: 1
   startingCount: 1
   startingSpeed: 1
   batchCooldown: 3.25
   displayColor: {r: 0.4, g: 0.5, b: 0.6, a: 1}
   symbol: B
+  customBehavior: {fileID: 11400000, guid: 0375ef81383041eaa7eee40379536ae5, type: 2}

@@ -17,10 +17,11 @@ MonoBehaviour:
   title: Trick Ball
   description: Trick ball behaviour.
   prefab: {fileID: 5264840048297102225, guid: 2adb777f0ece47e88f57489e81a3bd69, type: 3}
-  startsUnlocked: 1
+  startsUnlocked: 0
   startingValue: 1
   startingCount: 1
   startingSpeed: 1
   batchCooldown: 3.25
   displayColor: {r: 0.6, g: 0.2, b: 1, a: 1}
   symbol: B
+  customBehavior: {fileID: 11400000, guid: 3f3b35a8a42944d699b8cb766bc8f3ea, type: 2}
