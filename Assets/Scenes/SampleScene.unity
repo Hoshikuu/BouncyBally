@@ -313,8 +313,8 @@ RectTransform:
   - {fileID: 799618682}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.05, y: 0.5}
+  m_AnchorMax: {x: 0.05, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -823,6 +823,14 @@ MonoBehaviour:
   drag: {fileID: 950000001377}
   connections: {fileID: 950000000226}
   nodeViews:
+  - {fileID: 980000000168}
+  - {fileID: 980000000145}
+  - {fileID: 980000000122}
+  - {fileID: 980000000099}
+  - {fileID: 980000000076}
+  - {fileID: 980000000053}
+  - {fileID: 980000000030}
+  - {fileID: 980000000007}
   - {fileID: 980000000237}
   - {fileID: 980000000214}
   - {fileID: 980000000191}
@@ -1327,8 +1335,8 @@ RectTransform:
   - {fileID: 1571512909}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.10291528, y: 0.5}
-  m_AnchorMax: {x: 0.10291528, y: 0.5}
+  m_AnchorMin: {x: 0.12008847, y: 0.5}
+  m_AnchorMax: {x: 0.12008847, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2405,8 +2413,8 @@ RectTransform:
   - {fileID: 331240800}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2, y: 0.8}
-  m_AnchorMax: {x: 0.2, y: 0.8}
+  m_AnchorMin: {x: 0.20060629, y: 0.35420224}
+  m_AnchorMax: {x: 0.20060629, y: 0.35420224}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -34467,6 +34475,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 980000000169}
+  - {fileID: 980000000146}
+  - {fileID: 980000000123}
+  - {fileID: 980000000100}
+  - {fileID: 980000000077}
+  - {fileID: 980000000054}
+  - {fileID: 980000000031}
+  - {fileID: 980000000008}
   - {fileID: 980000000238}
   - {fileID: 980000000215}
   - {fileID: 980000000192}
@@ -34580,7 +34596,7 @@ GameObject:
   - component: {fileID: 950000000328}
   - component: {fileID: 950000000341}
   m_Layer: 5
-  m_Name: Lucky Ball unlock
+  m_Name: Lucky Ball Unlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34603,8 +34619,8 @@ RectTransform:
   - {fileID: 950000000338}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.18245812, y: 0.12617877}
-  m_AnchorMax: {x: 0.18245812, y: 0.12617877}
+  m_AnchorMin: {x: 0.2737758, y: 0.5731375}
+  m_AnchorMax: {x: 0.2737758, y: 0.5731375}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -35246,8 +35262,8 @@ RectTransform:
   - {fileID: 950000000361}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.58341354, y: 0.11557344}
-  m_AnchorMax: {x: 0.58341354, y: 0.11557344}
+  m_AnchorMin: {x: 0.40203938, y: 0.7269346}
+  m_AnchorMax: {x: 0.40203938, y: 0.7269346}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -35866,7 +35882,7 @@ GameObject:
   - component: {fileID: 950000000397}
   - component: {fileID: 950000000410}
   m_Layer: 5
-  m_Name: Basic Auto
+  m_Name: basic_auto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35889,8 +35905,8 @@ RectTransform:
   - {fileID: 950000000407}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.9500328, y: 0.062411465}
-  m_AnchorMax: {x: 0.9500328, y: 0.062411465}
+  m_AnchorMin: {x: 0.7246973, y: 0.19564468}
+  m_AnchorMax: {x: 0.7246973, y: 0.19564468}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -36532,8 +36548,8 @@ RectTransform:
   - {fileID: 950000000568}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.79339224, y: 0.09538962}
-  m_AnchorMax: {x: 0.79339224, y: 0.09538962}
+  m_AnchorMin: {x: 0.2762102, y: 0.4112202}
+  m_AnchorMax: {x: 0.2762102, y: 0.4112202}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -37175,8 +37191,8 @@ RectTransform:
   - {fileID: 950000000591}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7035105, y: 0.10526805}
-  m_AnchorMax: {x: 0.7035105, y: 0.10526805}
+  m_AnchorMin: {x: 0.5766933, y: 0.1668651}
+  m_AnchorMax: {x: 0.5766933, y: 0.1668651}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -37818,8 +37834,8 @@ RectTransform:
   - {fileID: 950000000982}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.85609895, y: 0.06778902}
-  m_AnchorMax: {x: 0.85609895, y: 0.06778902}
+  m_AnchorMin: {x: 0.3354493, y: 0.7269346}
+  m_AnchorMax: {x: 0.3354493, y: 0.7269346}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -38438,7 +38454,7 @@ GameObject:
   - component: {fileID: 950000001018}
   - component: {fileID: 950000001031}
   m_Layer: 5
-  m_Name: Lucky Auto
+  m_Name: lucky_auto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38461,8 +38477,8 @@ RectTransform:
   - {fileID: 950000001028}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.9080713, y: 0.06923153}
-  m_AnchorMax: {x: 0.9080713, y: 0.06923153}
+  m_AnchorMin: {x: 0.6806516, y: 0.19509844}
+  m_AnchorMax: {x: 0.6806516, y: 0.19509844}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -64923,8 +64939,8 @@ RectTransform:
   - {fileID: 960000002866}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.26703414, y: 0.111998364}
-  m_AnchorMax: {x: 0.26703414, y: 0.111998364}
+  m_AnchorMin: {x: 0.2737758, y: 0.49249548}
+  m_AnchorMax: {x: 0.2737758, y: 0.49249548}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -65566,8 +65582,8 @@ RectTransform:
   - {fileID: 960000002889}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3908893, y: 0.116640195}
-  m_AnchorMax: {x: 0.3908893, y: 0.116640195}
+  m_AnchorMin: {x: 0.2583491, y: 0.19443725}
+  m_AnchorMax: {x: 0.2583491, y: 0.19443725}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -66209,8 +66225,8 @@ RectTransform:
   - {fileID: 960000002912}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5018708, y: 0.11364035}
-  m_AnchorMax: {x: 0.5018708, y: 0.11364035}
+  m_AnchorMin: {x: 0.30816904, y: 0.19114774}
+  m_AnchorMax: {x: 0.30816904, y: 0.19114774}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -68240,7 +68256,7 @@ GameObject:
   - component: {fileID: 980000000012}
   - component: {fileID: 980000000007}
   m_Layer: 5
-  m_Name: Unlock Basket Ball
+  m_Name: Ball 2 Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68258,7 +68274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412e5affd3174c0789a92d0f34b813d7, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SkillNodeUI
-  skill: {fileID: 11400000, guid: ce1d11dc8b2142a8b3ea4515dd05c8a3, type: 2}
+  skill: {fileID: 11400000, guid: bf58153483f52940da1d3c6168e5a7d8, type: 2}
   button: {fileID: 980000000010}
   background: {fileID: 980000000009}
   icon: {fileID: 980000000001}
@@ -68282,8 +68298,8 @@ RectTransform:
   - {fileID: 980000000018}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.3354493, y: 0.5731375}
+  m_AnchorMax: {x: 0.3354493, y: 0.5731375}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -68883,7 +68899,7 @@ GameObject:
   - component: {fileID: 980000000035}
   - component: {fileID: 980000000030}
   m_Layer: 5
-  m_Name: Unlock Beach Ball
+  m_Name: Ball2 Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68901,7 +68917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412e5affd3174c0789a92d0f34b813d7, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SkillNodeUI
-  skill: {fileID: 11400000, guid: 790a0e6b4e82422bb013d53d60ac217c, type: 2}
+  skill: {fileID: 11400000, guid: ae934f64662dafc24869ba01d5b0de6e, type: 2}
   button: {fileID: 980000000033}
   background: {fileID: 980000000032}
   icon: {fileID: 980000000024}
@@ -68925,8 +68941,8 @@ RectTransform:
   - {fileID: 980000000041}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.3354493, y: 0.6513493}
+  m_AnchorMax: {x: 0.3354493, y: 0.6513493}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -69526,7 +69542,7 @@ GameObject:
   - component: {fileID: 980000000058}
   - component: {fileID: 980000000053}
   m_Layer: 5
-  m_Name: Unlock Chemical Ball
+  m_Name: Ball 3 Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69544,7 +69560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412e5affd3174c0789a92d0f34b813d7, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SkillNodeUI
-  skill: {fileID: 11400000, guid: 58906e535de14bdaa965f715a7005d57, type: 2}
+  skill: {fileID: 11400000, guid: edc37177e8603473f9f2535063f1bd6d, type: 2}
   button: {fileID: 980000000056}
   background: {fileID: 980000000055}
   icon: {fileID: 980000000047}
@@ -69568,8 +69584,8 @@ RectTransform:
   - {fileID: 980000000064}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.33002782, y: 0.8186938}
+  m_AnchorMax: {x: 0.33002782, y: 0.8186938}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -70169,7 +70185,7 @@ GameObject:
   - component: {fileID: 980000000081}
   - component: {fileID: 980000000076}
   m_Layer: 5
-  m_Name: Unlock Constructor Ball
+  m_Name: Ball 3 Speed 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70187,7 +70203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412e5affd3174c0789a92d0f34b813d7, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SkillNodeUI
-  skill: {fileID: 11400000, guid: 137851d745e846bba3abfe0840dfb685, type: 2}
+  skill: {fileID: 11400000, guid: 51b6659c21eefaa79bc1973cf1cd2265, type: 2}
   button: {fileID: 980000000079}
   background: {fileID: 980000000078}
   icon: {fileID: 980000000070}
@@ -70211,8 +70227,8 @@ RectTransform:
   - {fileID: 980000000087}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.39643705, y: 0.8186938}
+  m_AnchorMax: {x: 0.39643705, y: 0.8186938}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -70812,7 +70828,7 @@ GameObject:
   - component: {fileID: 980000000104}
   - component: {fileID: 980000000099}
   m_Layer: 5
-  m_Name: Unlock Gambler Ball
+  m_Name: Ball 3 Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70830,7 +70846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412e5affd3174c0789a92d0f34b813d7, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SkillNodeUI
-  skill: {fileID: 11400000, guid: 50469115dec444c29a2853b3103016fc, type: 2}
+  skill: {fileID: 11400000, guid: b1de8a5ef8ec40c978fb91c7a28921a2, type: 2}
   button: {fileID: 980000000102}
   background: {fileID: 980000000101}
   icon: {fileID: 980000000093}
@@ -70854,8 +70870,8 @@ RectTransform:
   - {fileID: 980000000110}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.2623627, y: 0.7269346}
+  m_AnchorMax: {x: 0.2623627, y: 0.7269346}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -71455,7 +71471,7 @@ GameObject:
   - component: {fileID: 980000000127}
   - component: {fileID: 980000000122}
   m_Layer: 5
-  m_Name: Unlock Ghost Ball
+  m_Name: Ball 3 Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71473,7 +71489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412e5affd3174c0789a92d0f34b813d7, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SkillNodeUI
-  skill: {fileID: 11400000, guid: adf69bef87c448c6a29c412a86817e70, type: 2}
+  skill: {fileID: 11400000, guid: 26efb8c7b354bbf26b590256aa9a71f5, type: 2}
   button: {fileID: 980000000125}
   background: {fileID: 980000000124}
   icon: {fileID: 980000000116}
@@ -71497,8 +71513,8 @@ RectTransform:
   - {fileID: 980000000133}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.26236272, y: 0.81869376}
+  m_AnchorMax: {x: 0.26236272, y: 0.81869376}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -72098,7 +72114,7 @@ GameObject:
   - component: {fileID: 980000000150}
   - component: {fileID: 980000000145}
   m_Layer: 5
-  m_Name: Unlock Golden Ball
+  m_Name: Ball 3 dupliball chance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72116,7 +72132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412e5affd3174c0789a92d0f34b813d7, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SkillNodeUI
-  skill: {fileID: 11400000, guid: 69d806e769e84ccb97f8b7c25045b527, type: 2}
+  skill: {fileID: 11400000, guid: f67987826238571feb22cb15d810fb5f, type: 2}
   button: {fileID: 980000000148}
   background: {fileID: 980000000147}
   icon: {fileID: 980000000139}
@@ -72140,8 +72156,8 @@ RectTransform:
   - {fileID: 980000000156}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.4716007, y: 0.8186938}
+  m_AnchorMax: {x: 0.4716007, y: 0.8186938}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -72741,7 +72757,7 @@ GameObject:
   - component: {fileID: 980000000173}
   - component: {fileID: 980000000168}
   m_Layer: 5
-  m_Name: Unlock Marble Ball
+  m_Name: Ball Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72759,7 +72775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412e5affd3174c0789a92d0f34b813d7, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SkillNodeUI
-  skill: {fileID: 11400000, guid: bbd334fe89df4f99b7e96ef0db367d2c, type: 2}
+  skill: {fileID: 11400000, guid: a2e5dcd7dbbb04b909a8c5cfaf7307e2, type: 2}
   button: {fileID: 980000000171}
   background: {fileID: 980000000170}
   icon: {fileID: 980000000162}
@@ -72783,8 +72799,8 @@ RectTransform:
   - {fileID: 980000000179}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.20153512, y: 0.57313746}
+  m_AnchorMax: {x: 0.20153512, y: 0.57313746}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -73426,8 +73442,8 @@ RectTransform:
   - {fileID: 980000000202}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.758, y: 0.94}
+  m_AnchorMax: {x: 0.758, y: 0.94}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -74069,8 +74085,8 @@ RectTransform:
   - {fileID: 980000000225}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.844, y: 0.94}
+  m_AnchorMax: {x: 0.844, y: 0.94}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -74712,8 +74728,8 @@ RectTransform:
   - {fileID: 980000000248}
   m_Father: {fileID: 950000000222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036184307, y: 0.5}
-  m_AnchorMax: {x: 0.036184307, y: 0.5}
+  m_AnchorMin: {x: 0.930, y: 0.94}
+  m_AnchorMax: {x: 0.930, y: 0.94}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
