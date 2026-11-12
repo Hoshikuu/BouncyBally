@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cb207d87b94bf5a5d77ade5e6cfd2c, type: 3}
+  m_Name: Basket Ball
+  m_EditorClassIdentifier: Assembly-CSharp::BallDefinition
+  rule: 0
+  ruleAmount: 0.25
+  title: Basket Ball
+  description: Basket ball behaviour.
+  prefab: {fileID: 5264840048297102225, guid: dbce7913d9d3467f8d1f830568d664e0, type: 3}
+  startsUnlocked: 1
+  startingValue: 1
+  startingCount: 1
+  startingSpeed: 1
+  batchCooldown: 3.25
+  displayColor: {r: 1, g: 0.4, b: 0.05, a: 1}
+  symbol: B

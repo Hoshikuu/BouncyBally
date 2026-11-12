@@ -20,6 +20,8 @@ public class BallController : MonoBehaviour
     private int batchId;
     private bool finished;
     private BallBase ball;
+    private BallSpecial special;
+    public bool IsFirstArrival => spawner != null && spawner.IsFirstArrival(batchId);
     private BallVisualEffects visuals;
     private GaltonEffects effects;
     private float speed;
@@ -47,6 +49,9 @@ public class BallController : MonoBehaviour
         effects = board.GetComponent<GaltonEffects>();
         ball.SetIdentityColor(definition != null ? definition.DisplayColor : Color.white);
         ball.Setup(value, board.Colors);
+        special = ball as BallSpecial;
+        if (special != null)
+        { speed *= special.SpeedFactor; transform.localScale *= special.SizeFactor; bounceHeight *= special.BounceFactor; }
         StartCoroutine(Traverse());
     }
 
@@ -60,18 +65,26 @@ public class BallController : MonoBehaviour
         {
             Pin pin = board.GetPin(row, column);
             bool right = Random.value < pin.RightChance;
+            if (special != null) right = special.Direction(row, right);
             if (lastRight.HasValue && lastRight.Value != right) alternations++;
             lastRight = right;
             chain = pin.Modifier != null ? chain + 1 : 0;
             double bonus = pin.MultiplierBonus + pinBonus;
             if (type.Rule == BallDefinition.BallRule.Alternating) bonus += alternations * type.RuleAmount;
-            double appliedBonus = ball.AddPinBonus(pin.ResolveContactBonus(bonus,batchId,alternations,chain));
-            if (type.Rule == BallDefinition.BallRule.Pulse && pin.Modifier != null) GameManager.Instance.TriggerPulse(type);
-            pin.PlayImpact();
-            if (effects != null)
-                effects.PlayPin(pin.transform.position, pin.CurrentColor, appliedBonus);
-            if (visuals != null)
-                visuals.PlayBounce();
+            int contacts = special != null ? special.Contacts : 1;
+            for (int contact = 0; contact < contacts; contact++)
+            {
+                double appliedBonus = ball.AddPinBonus(pin.ResolveContactBonus(bonus,batchId,alternations,chain));
+                if (type.Rule == BallDefinition.BallRule.Pulse && pin.Modifier != null) GameManager.Instance.TriggerPulse(type);
+                pin.PlayImpact();
+                if (effects != null)
+                    effects.PlayPin(pin.transform.position, pin.CurrentColor, appliedBonus);
+                if (visuals != null)
+                    visuals.PlayBounce();
+                if (special != null) special.Contact(pin);
+                if (contact + 1 < contacts)
+                    yield return MoveTo(transform.position, true);
+            }
             if (right)
                 column++;
             Vector3 target = row == board.Rows - 1
@@ -83,6 +96,12 @@ public class BallController : MonoBehaviour
         // Cada recorrido calcula y entrega su recompensa una sola vez.
         double slotMultiplier = board.GetMultiplier(column);
         double reward = ball.ComputeReward(slotMultiplier + slotBonus) * rewardFactor * GameManager.Instance.PulseFactor(type);
+        if (special != null)
+        {
+            double factor = 1d;
+            yield return special.Resolve(this, result => factor = result);
+            reward *= factor;
+        }
         GameManager.Instance.AddMoney(reward);
         spawner.RecordResult(batchId, column, reward);
         if (effects != null)

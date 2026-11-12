@@ -15,7 +15,22 @@ public class BallSpawner : MonoBehaviour
     private GameManager economy;
     private int pendingBalls, nextBatch;
     public int PendingBalls => pendingBalls;
-    public IReadOnlyList<BallDefinition> Balls => skillTree.Balls;
+    private BallDefinition[] availableBalls;
+    public IReadOnlyList<BallDefinition> Balls
+    {
+        get
+        {
+            if (availableBalls == null)
+            {
+                var all = new List<BallDefinition>(skillTree.Balls);
+                foreach (var extra in Resources.LoadAll<BallDefinition>("ExtraBalls"))
+                    if (!all.Contains(extra)) all.Add(extra);
+                availableBalls = all.ToArray();
+            }
+            return availableBalls;
+        }
+    }
+    public bool IsFirstArrival(int id) => results.TryGetValue(id, out Result result) && result.landed == 0;
     public event System.Action ConfigurationChanged;
     public event System.Action<double> BatchCompleted;
     public event System.Action<int> BallLanded;
@@ -74,8 +89,14 @@ public class BallSpawner : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            BallController ball = Instantiate(type.Prefab, board.GetSpawnPosition(), Quaternion.identity);
-            ball.Setup(board, this, value, speed, pin, slot, type, reward, id);
+            BallDefinition appearance = type;
+            // Las variantes sorpresa conservan el valor y la tanda de origen.
+            float surprise = Random.value;
+            string replacement = surprise < .01f ? "Golden Ball" : surprise < .03f ? "Constructor Ball" : null;
+            if (replacement != null)
+                foreach (var candidate in Balls) if (candidate.name == replacement) { appearance = candidate; break; }
+            BallController ball = Instantiate(appearance.Prefab, board.GetSpawnPosition(), Quaternion.identity);
+            ball.Setup(board, this, value, speed, pin, slot, appearance, reward, id);
             if (i + 1 < count) yield return new WaitForSeconds(economy.Settings.spawnInterval);
         }
     }

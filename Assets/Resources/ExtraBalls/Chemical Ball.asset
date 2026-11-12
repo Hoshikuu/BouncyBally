@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cb207d87b94bf5a5d77ade5e6cfd2c, type: 3}
+  m_Name: Chemical Ball
+  m_EditorClassIdentifier: Assembly-CSharp::BallDefinition
+  rule: 0
+  ruleAmount: 0.25
+  title: Chemical Ball
+  description: Chemical ball behaviour.
+  prefab: {fileID: 5264840048297102225, guid: a0bd0648ad5640aaa3e32d9e751e2ed1, type: 3}
+  startsUnlocked: 1
+  startingValue: 1
+  startingCount: 1
+  startingSpeed: 1
+  batchCooldown: 3.25
+  displayColor: {r: 0.4, g: 1, b: 0.1, a: 1}
+  symbol: B
