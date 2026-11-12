@@ -100,10 +100,7 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         Settings = BouncyBallySettings.Current;
-        if (Settings == null) { Debug.LogError("Missing BouncyBallySettings resource."); enabled = false; return; }
         money = Settings.startingMoney;
-        if (tree == null || inventory == null || progression == null || collection == null || board == null)
-        { Debug.LogError("GameManager has missing scene references.", this); enabled = false; return; }
         Progression.Initialize(this, Inventory, Settings);
         Collection.Initialize(this, Inventory, Progression, Settings);
     }

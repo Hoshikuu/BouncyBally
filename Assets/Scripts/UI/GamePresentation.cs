@@ -32,20 +32,10 @@ public class GamePresentation : MonoBehaviour
     private readonly List<KeyValuePair<Button,UnityAction>> listeners=new List<KeyValuePair<Button,UnityAction>>();
     public bool WorkshopOpen=>workshop!=null&&workshop.IsOpen;
     private void Awake()=>Instance=this;
-    private bool HasReferences()=>game!=null&&spawner!=null&&tree!=null&&workshop!=null&&progression!=null&&batchConfiguration!=null&&
-        menu!=null&&settings!=null&&batchContent!=null&&cards!=null&&
-        gameTitle!=null&&motionLabel!=null&&playLabel!=null&&
-        pinButton!=null&&skillsButton!=null&&settingsButton!=null&&playButton!=null&&menuSettingsButton!=null&&
-        goalsButton!=null&&landingsButton!=null&&motionButton!=null&&backSettingsButton!=null&&
-        mainMenuButton!=null;
     private void Start()
     {
-        if(!HasReferences()||game.Settings==null)
-        {Debug.LogError("GamePresentation has missing scene references.",this);enabled=false;return;}
-        if(!tree.Initialize()||!workshop.Initialize()||!progression.Initialize()||!batchConfiguration.Initialize())
-        {Debug.LogError("Scene UI is incomplete. Run Bouncy Bally > Run checks.",this);enabled=false;return;}
-        foreach(BallBatchCard card in cards)
-            if(card==null||!card.Initialize()){Debug.LogError("Missing batch scene view.",this);enabled=false;return;}
+        tree.Initialize(); workshop.Initialize(); progression.Initialize(); batchConfiguration.Initialize();
+        foreach(BallBatchCard card in cards) card.Initialize();
         Bind(skillsButton,OpenSkills);Bind(pinButton,OpenWorkshop);Bind(settingsButton,()=>OpenSettings(false));
         Bind(playButton,Play);Bind(menuSettingsButton,()=>OpenSettings(true));
         Bind(goalsButton,()=>progression.OpenGoals());Bind(landingsButton,()=>progression.OpenStats());

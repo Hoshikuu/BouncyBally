@@ -17,8 +17,6 @@ public class BallBatchCard : MonoBehaviour
     public bool Initialize()
     {
         if (initialized) return true;
-        if (spawner == null || presentation == null || fill == null || identity == null || launch == null || auto == null || label == null || autoLabel == null || title == null || details == null)
-        { Debug.LogError("Batch card has missing scene references.", this); return false; }
         launch.onClick.AddListener(Launch); auto.onClick.AddListener(ToggleAuto);
         GaltonTheme.StyleButton(launch); initialized = true; return true;
     }

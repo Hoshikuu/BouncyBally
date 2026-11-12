@@ -20,7 +20,7 @@ MonoBehaviour:
   startsUnlocked: 1
   startingValue: 1
   startingCount: 3
-  startingSpeed: 1
+  startingSpeed: 0.6
   batchCooldown: 3.25
   displayColor: {r: 0.12, g: 0.83, b: 1, a: 1}
   symbol: B

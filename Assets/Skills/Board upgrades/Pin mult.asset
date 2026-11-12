@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a33409b81c4cc7bf5fb0d1e8e4dd31, type: 3}
+  m_Name: Pin mult
+  m_EditorClassIdentifier: Assembly-CSharp::SkillDefinition
+  icon: {fileID: 0}
+  title: Pin mult
+  description: Gives all pins a mult
+  effect: 3
+  targetBalls: []
+  unlockBall: {fileID: 0}
+  customAction: {fileID: 0}
+  amountPerLevel: 0.5
+  firstCost: 12
+  costGrowth: 2
+  maxLevel: 2
+  position: {x: 0.20060629, y: 0.35420224}
+  prerequisite: {fileID: 11400000, guid: 73c628919455c0aaebf6a7f81710e4d2, type: 2}
+  prerequisiteLevel: 1

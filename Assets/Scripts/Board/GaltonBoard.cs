@@ -52,14 +52,6 @@ public class GaltonBoard : MonoBehaviour
 
     private void Start()
     {
-        if (pinPrefab == null || slotViews == null || slotViews.Length < MaxRows + 1 ||
-            Array.Exists(slotViews, slot => slot == null))
-        {
-            Debug.LogError("GaltonBoard needs a pin prefab and nine scene slots.", this);
-            enabled = false;
-            return;
-        }
-
         UpdateLayout();
         AddMissingRows();
         RefreshSlots();
@@ -240,7 +232,10 @@ public class GaltonBoard : MonoBehaviour
             if (!visible)
                 continue;
             slotViews[column].transform.position = GetSlotPosition(column);
-            slotViews[column].Setup(GetMultiplier(column), colorPalette, spacingX * 0.88f);
+            var settings = BouncyBallySettings.Current;
+            slotViews[column].Setup(GetMultiplier(column), colorPalette,
+                spacingX * (settings != null ? settings.slotWidthRatio : .96f),
+                settings != null ? settings.slotHeight : .48f);
         }
     }
 
@@ -257,9 +252,14 @@ public class GaltonBoard : MonoBehaviour
         return layoutCenter + new Vector3(x, layoutTop - rows * spacingY, 0f);
     }
 
-    public Vector3 GetSpawnPosition()
+    public Vector3 GetSpawnPosition(float margin = 1f)
     {
-        return GetPinPosition(0, 0) + Vector3.up * 0.9f;
+        Vector3 firstPin = GetPinPosition(0, 0);
+        Camera camera = Camera.main;
+        if (camera == null) return firstPin + Vector3.up * (10f + margin);
+        Vector3 viewport = camera.WorldToViewportPoint(firstPin);
+        viewport.y = 1f;
+        return camera.ViewportToWorldPoint(viewport) + camera.transform.up * margin;
     }
 
     /// <summary>Combina el valor del tablero con las duplicaciones compradas.</summary>

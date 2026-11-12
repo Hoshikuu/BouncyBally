@@ -64,14 +64,6 @@ public class ProgressionUI : MonoBehaviour
     public bool Initialize()
     {
         if (initialized) return true;
-        // Primero se valida todo: un fallo no deja botones ni eventos parcialmente enlazados.
-        if (!ValidateReferences())
-        {
-            Debug.LogError("ProgressionUI requires all scene references and complete rows.", this);
-            CloseAll();
-            return false;
-        }
-
         subscribedGame = game;
         subscribedProgression = game.Progression;
         subscribedCollection = game.Collection;
@@ -83,13 +75,11 @@ public class ProgressionUI : MonoBehaviour
 
         foreach (GoalRow row in rows ?? Array.Empty<GoalRow>())
         {
-            if (!ValidGoalRow(row)) continue;
             ChallengeDefinition item = row.goal;
             Bind(row.claim, () => { game.Progression.Claim(item); Refresh(); });
         }
         foreach (BoxRow row in boxes ?? Array.Empty<BoxRow>())
         {
-            if (!ValidBoxRow(row)) continue;
             GachaDefinition item = row.box;
             Bind(row.open, () =>
             {
@@ -120,21 +110,9 @@ public class ProgressionUI : MonoBehaviour
         return true;
     }
 
-    private bool ValidateReferences()
-    {
-        if (game == null || presentation == null || spawner == null || game.Settings == null ||
-            game.Board == null || game.Progression == null || game.Collection == null ||
-            stats == null || statistics == null || chart == null ||
-            closeButtons == null || closeButtons.Length == 0) return false;
-        foreach (Button button in closeButtons) if (button == null) return false;
-        return true;
-    }
 
-    private static bool ValidGoalRow(GoalRow row) => row != null && row.goal != null &&
-        row.label != null && row.claim != null && row.claimLabel != null;
 
-    private static bool ValidBoxRow(BoxRow row) => row != null && row.box != null &&
-        row.label != null && row.odds != null && row.open != null && row.openLabel != null;
+
 
     private void Bind(Button button, UnityAction callback)
     {
@@ -195,7 +173,6 @@ public class ProgressionUI : MonoBehaviour
         if (!initialized || game == null || spawner == null || !IsOpen) return;
         foreach (GoalRow row in rows ?? Array.Empty<GoalRow>())
         {
-            if (!ValidGoalRow(row)) continue;
             bool ratio = row.goal.metric == ChallengeMetric.EdgeRatio;
             double value = game.Progression.Value(row.goal);
             string progress = ratio ? (value * 100).ToString("0") + "% / " + (row.goal.target * 100).ToString("0") + "%" :
@@ -217,7 +194,6 @@ public class ProgressionUI : MonoBehaviour
         if (tickets != null) tickets.text = game.Progression.Tickets + " CORES";
         foreach (BoxRow row in boxes ?? Array.Empty<BoxRow>())
         {
-            if (!ValidBoxRow(row)) continue;
             row.label.text = row.box.title + " · " + row.box.ticketCost + " cores · " + game.Collection.Remaining(row.box) + " left";
             row.open.interactable = game.Collection.CanOpen(row.box);
             row.openLabel.text = game.Collection.Remaining(row.box) == 0 ? "EMPTY" : "OPEN";

@@ -49,18 +49,7 @@ public class SkillDefinition : ScriptableObject
 
     public double CostAt(int level) => Math.Ceiling(firstCost * Math.Pow(Math.Round(costGrowth, 6), level));
 
-    private void OnValidate()
-    {
-        firstCost = Mathf.Max(1f, firstCost);
-        costGrowth = Mathf.Max(1f, costGrowth);
-        amountPerLevel = Mathf.Max(0.01f, amountPerLevel);
-        maxLevel = Mathf.Clamp(maxLevel, 1, 3);
-        prerequisiteLevel = Mathf.Clamp(prerequisiteLevel, 1, prerequisite != null ? prerequisite.MaxLevel : 3);
-        if (prerequisite == this) prerequisite = null;
-        if (effect == SkillEffect.RewardMultiplier) amountPerLevel = Mathf.Max(1f, amountPerLevel);
-        if (IsSingleLevel) maxLevel = 1;
-        if (IsBoardSkill) targetBalls.Clear();
-    }
+
 
     /// <summary>Explica en inglés la compra, su destino y su tamaño real.</summary>
     public string Details(int level, bool complete, GaltonBoard board)

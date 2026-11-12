@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cb207d87b94bf5a5d77ade5e6cfd2c, type: 3}
+  m_Name: Ghost Ball
+  m_EditorClassIdentifier: Assembly-CSharp::BallDefinition
+  rule: 0
+  ruleAmount: 0.25
+  title: Ghost Ball
+  description: Ghost ball behaviour.
+  prefab: {fileID: 5264840048297102225, guid: d21328d96b0847f9961a4593a135c5b7, type: 3}
+  startsUnlocked: 0
+  startingValue: 1
+  startingCount: 1
+  startingSpeed: 1
+  batchCooldown: 3.25
+  displayColor: {r: 0.7, g: 0.9, b: 1, a: 1}
+  symbol: B
+  customBehavior: {fileID: 11400000, guid: f639ae7d0d264db6a1789325f41c2d26, type: 2}

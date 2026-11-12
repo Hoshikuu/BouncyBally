@@ -19,8 +19,6 @@ public static class GaltonSceneBuilder
         if(config==null){EditorUtility.DisplayDialog("Bouncy Bally","Missing settings asset.","OK");return;}
         BallDefinition[] balls=Load<BallDefinition>();
         CreateMissingBallChoices(balls);
-        if(!CanSyncBallCatalog(config,balls,out string reason))
-        { EditorUtility.DisplayDialog("Ball catalog not synced",reason,"OK"); return; }
         Undo.RecordObject(config,"Sync Bouncy Bally catalogs");
         config.balls=balls;config.skills=Load<SkillDefinition>();config.modifiers=Load<PinModifierDefinition>();config.challenges=Load<ChallengeDefinition>();config.gachas=Load<GachaDefinition>();
         EditorUtility.SetDirty(config);
@@ -92,7 +90,7 @@ public static class GaltonSceneBuilder
         }
         foreach(var ball in balls)
         {
-            if(ball==null || existing.Contains(ball)) continue;
+            if(ball==null || ball.RandomOnly || existing.Contains(ball)) continue;
             var clone=Object.Instantiate(template.gameObject,template.transform.parent);
             clone.name=ball.name+" Choice";
             Undo.RegisterCreatedObjectUndo(clone,"Create ball choice");
@@ -114,36 +112,6 @@ public static class GaltonSceneBuilder
         EditorSceneManager.MarkSceneDirty(configuration.gameObject.scene);
     }
     /// <summary>Evita cambiar el catálogo si la escena no dispone de una opción completa por bola.</summary>
-    public static bool CanSyncBallCatalog(BouncyBallySettings config, BallDefinition[] balls, out string reason)
-    {
-        reason = null;
-        var configuration=FindInScene<BatchConfigurationUI>();
-        if(configuration==null)
-        {
-            if(config!=null && new HashSet<BallDefinition>(config.balls ?? new BallDefinition[0]).SetEquals(balls)) return true;
-            reason="Open the game scene with BatchConfigurationUI before changing the ball catalog. Create and link a choice for each ball, then sync again.";
-            return false;
-        }
-        var choices=new SerializedObject(configuration).FindProperty("choices");
-        var seen=new HashSet<BallDefinition>();
-        if(choices!=null && choices.arraySize==balls.Length)
-        {
-            for(int i=0;i<choices.arraySize;i++)
-            {
-                var row=choices.GetArrayElementAtIndex(i);
-                var ball=row.FindPropertyRelative("ball").objectReferenceValue as BallDefinition;
-                if(ball==null || !balls.Contains(ball) || seen.Contains(ball) ||
-                    row.FindPropertyRelative("button").objectReferenceValue==null ||
-                    row.FindPropertyRelative("label").objectReferenceValue==null ||
-                    row.FindPropertyRelative("identity").objectReferenceValue==null) break;
-                seen.Add(ball);
-            }
-            if(seen.Count==balls.Length) return true;
-        }
-        reason="The ball catalog was not changed: BatchConfigurationUI needs one complete choice per catalog ball. Create and link the missing scene choices, then sync again.";
-        return false;
-    }
-    /// <summary>Crea en edición una vista a partir de un nodo existente y sincroniza sus referencias.</summary>
     public static void CreateSkillNode(SkillDefinition skill)
     {
         if (skill == null) return;
@@ -153,100 +121,6 @@ public static class GaltonSceneBuilder
 
     }
     /// <summary>Valida componentes y referencias ya existentes; no modifica la escena.</summary>
-    public static List<string> SceneIssues()
-    {
-        var issues=new List<string>();
-        var scene=SceneManager.GetActiveScene();
-        Canvas canvas=FindInScene<Canvas>();
-        if(canvas==null){issues.Add("Missing scene Canvas.");return issues;}
-        foreach(Graphic graphic in canvas.GetComponentsInChildren<Graphic>(true))
-            if(graphic.GetComponent<CanvasRenderer>()==null)issues.Add(graphic.name+": missing CanvasRenderer.");
-        var required=new Dictionary<System.Type,string[]> {
-            {typeof(GameManager),new[]{"tree","inventory","progression","collection","board","moneyText"}},
-            {typeof(GamePresentation),new[]{"game","spawner","tree","workshop","progression","batchConfiguration","menu","settings","batchContent","gameTitle","motionLabel","playLabel","pinButton","skillsButton","settingsButton","playButton","menuSettingsButton","goalsButton","landingsButton","motionButton","backSettingsButton","mainMenuButton"}},
-            {typeof(SkillTreeController),new[]{"game","window","graph","viewport","drag","connections","closeButton","fitButton","buyButton","title","description","price"}},
-            {typeof(SkillNodeUI),new[]{"skill","button","background","icon","symbolText","statusText"}},
-            {typeof(BallBatchCard),new[]{"spawner","presentation","fill","identity","launch","auto","label","autoLabel","title","details"}},
-            {typeof(PinWorkshopUI),new[]{"game","presentation","inventory","root","detail","leftText","rightText","upgradeText","left","right","upgrade","closeButton","gachaButton","removeButton","cancelButton","emptyText"}},
-            {typeof(BatchConfigurationUI),new[]{"game","spawner","root","openButton","closeButton","hint"}},
-            {typeof(ProgressionUI),new[]{"game","presentation","spawner","stats","statistics","chart"}}
-        };
-        foreach(var pair in required)
-        {
-            Component[] components=Object.FindObjectsByType(pair.Key,FindObjectsInactive.Include,FindObjectsSortMode.None)
-                .OfType<Component>().Where(x=>x.gameObject.scene==scene).ToArray();
-            if(pair.Key==typeof(SkillNodeUI) || pair.Key==typeof(BallBatchCard)) continue;
-            if(components.Length==0){issues.Add("Missing "+pair.Key.Name+" scene component.");continue;}
-            foreach(Component component in components)
-            {
-                var data=new SerializedObject(component);
-                foreach(string field in pair.Value)
-                {
-                    SerializedProperty property=data.FindProperty(field);
-                    if(property==null||property.objectReferenceValue==null)issues.Add(component.name+": missing "+field+".");
-                }
-            }
-        }
-        BouncyBallySettings config=AssetDatabase.LoadAssetAtPath<BouncyBallySettings>("Assets/Resources/BouncyBallySettings.asset");
-        SkillTreeController tree=FindInScene<SkillTreeController>();
-        if(tree!=null)
-        {
-            var treeData=new SerializedObject(tree);
-            var views=treeData.FindProperty("nodeViews");
-            if(views==null) issues.Add("Skill tree: missing nodeViews field.");
-            else for(int i=0;i<views.arraySize;i++)
-            {
-                var node=views.GetArrayElementAtIndex(i).objectReferenceValue as SkillNodeUI;
-                if(node==null || !node.HasSceneReferences) issues.Add("Skill tree: incomplete nodeViews["+i+"].");
-                else if(node.Rect==null) issues.Add("Skill tree: nodeViews["+i+"] needs a RectTransform.");
-            }
-        }
-        GamePresentation presentation=FindInScene<GamePresentation>();
-        if(presentation!=null)
-        {
-            var cards=new SerializedObject(presentation).FindProperty("cards");
-            if(cards==null) issues.Add("Game presentation: missing cards field.");
-            else for(int i=0;i<cards.arraySize;i++)
-            {
-                var card=cards.GetArrayElementAtIndex(i).objectReferenceValue as BallBatchCard;
-                if(card==null){issues.Add("Game presentation: missing cards["+i+"].");continue;}
-                if(card.Rect==null || card.BatchIndex<0 || card.BatchIndex>=BallSpawner.MaxBatches)
-                    issues.Add(card.name+": invalid batch index or RectTransform.");
-                var cardData=new SerializedObject(card);
-                foreach(string field in required[typeof(BallBatchCard)])
-                    if(cardData.FindProperty(field).objectReferenceValue==null) issues.Add(card.name+": missing "+field+".");
-            }
-        }
-        BatchConfigurationUI configuration=FindInScene<BatchConfigurationUI>();
-        if(configuration!=null)
-        {
-            var data=new SerializedObject(configuration);
-            foreach(string field in new[]{"slots","choices"})
-            {
-                SerializedProperty array=data.FindProperty(field);
-                int expected=field=="slots" ? BallSpawner.MaxBatches : (config!=null && config.balls!=null ? config.balls.Length : -1);
-                if(array==null){issues.Add("Batch configuration: missing "+field+".");continue;}
-                if(expected>=0 && array.arraySize!=expected) issues.Add("Batch configuration: "+field+" must match "+(field=="slots" ? "batch capacity" : "the ball catalog")+".");
-                var seen=new HashSet<Object>();
-                for(int index=0;index<array.arraySize;index++)
-                {
-                    var row=array.GetArrayElementAtIndex(index);
-                    foreach(string reference in field=="slots"?new[]{"button","label","identity"}:new[]{"ball","button","label","identity"})
-                    {
-                        var property=row.FindPropertyRelative(reference);
-                        if(property==null || property.objectReferenceValue==null) issues.Add("Batch configuration: missing "+field+"["+index+"]."+reference);
-                    }
-                    if(field=="choices")
-                    {
-                        var ball=row.FindPropertyRelative("ball").objectReferenceValue;
-                        if(ball!=null && (!seen.Add(ball) || (config!=null && config.balls!=null && !config.balls.Contains(ball))))
-                            issues.Add("Batch configuration: duplicate or unregistered ball in choices["+index+"].");
-                    }
-                }
-            }
-        }
-        return issues;
-    }
     private static void SetArray<T>(SerializedObject data,string field,T[] values)where T:Object
     {SerializedProperty list=data.FindProperty(field);list.arraySize=values.Length;for(int i=0;i<values.Length;i++)list.GetArrayElementAtIndex(i).objectReferenceValue=values[i];}
     public static void Assign(Object target,params object[] fields)

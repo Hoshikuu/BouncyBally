@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cb207d87b94bf5a5d77ade5e6cfd2c, type: 3}
+  m_Name: Constructor Ball
+  m_EditorClassIdentifier: Assembly-CSharp::BallDefinition
+  rule: 0
+  ruleAmount: 0.25
+  title: Constructor Ball
+  description: Constructor ball behaviour.
+  prefab: {fileID: 5264840048297102225, guid: 3f23122ed5754356b25b39e54e6f1d9b, type: 3}
+  startsUnlocked: 0
+  startingValue: 1
+  startingCount: 1
+  startingSpeed: 1
+  batchCooldown: 3.25
+  displayColor: {r: 1, g: 0.9, b: 0.2, a: 1}
+  symbol: B
+  customBehavior: {fileID: 11400000, guid: a59b5b88d8604dbe8d10bd2118fc7b2e, type: 2}
