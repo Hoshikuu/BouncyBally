@@ -32,14 +32,11 @@ MonoBehaviour:
   skills:
   - {fileID: 11400000, guid: bf58153483f52940da1d3c6168e5a7d8, type: 2}
   - {fileID: 11400000, guid: ae934f64662dafc24869ba01d5b0de6e, type: 2}
-  - {fileID: 11400000, guid: 2d362001c7e543f1b7accd9becd22720, type: 2}
-  - {fileID: 11400000, guid: 2e82ca22cb7440dd8ff22a7318b47da9, type: 2}
   - {fileID: 11400000, guid: edc37177e8603473f9f2535063f1bd6d, type: 2}
   - {fileID: 11400000, guid: 51b6659c21eefaa79bc1973cf1cd2265, type: 2}
   - {fileID: 11400000, guid: b1de8a5ef8ec40c978fb91c7a28921a2, type: 2}
   - {fileID: 11400000, guid: 26efb8c7b354bbf26b590256aa9a71f5, type: 2}
   - {fileID: 11400000, guid: f67987826238571feb22cb15d810fb5f, type: 2}
-  - {fileID: 11400000, guid: f48f721d889943408341755a18aad60d, type: 2}
   - {fileID: 11400000, guid: a2e5dcd7dbbb04b909a8c5cfaf7307e2, type: 2}
   - {fileID: 11400000, guid: 73c628919455c0aaebf6a7f81710e4d2, type: 2}
   - {fileID: 11400000, guid: 9d5f719e3ea28169680f9a3cb185a9ea, type: 2}
@@ -76,9 +73,9 @@ MonoBehaviour:
   boardWidth: 0.78
   boardHeight: 0.84
   pinScale: 0.45
+  ballScale: 0.28
   slotHeight: 0.48
   slotWidthRatio: 0.96
-  ballScale: 0.28
   segmentDuration: 0.34
   spawnInterval: 0.11
   payoutMultiplier: 1

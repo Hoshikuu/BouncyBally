@@ -50,10 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Editor/GaltonSceneBuilder.cs" />
-    <Compile Include="Assets/Editor/GaltonGameplayChecks.cs" />
     <Compile Include="Assets/Editor/GaltonScriptTemplates.cs" />
     <Compile Include="Assets/Editor/GaltonEditorWindow.cs" />
-    <Compile Include="Assets/Editor/BallTypeChecks.cs" />
+    <Compile Include="Assets/Editor/BallDefinitionInspector.cs" />
     <Compile Include="Assets/Editor/GaltonAssetDeletion.cs" />
   </ItemGroup>
   <ItemGroup>

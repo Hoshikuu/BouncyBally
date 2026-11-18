@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85cb207d87b94bf5a5d77ade5e6cfd2c, type: 3}
   m_Name: Beach Ball
   m_EditorClassIdentifier: Assembly-CSharp::BallDefinition
+  customBehavior: {fileID: 11400000, guid: 18df80bde6c0459786ef94f09d66b632, type: 2}
   rule: 0
   ruleAmount: 0.25
   title: Beach Ball
@@ -24,4 +25,3 @@ MonoBehaviour:
   batchCooldown: 3.25
   displayColor: {r: 1, g: 0.45, b: 0.3, a: 1}
   symbol: B
-  customBehavior: {fileID: 11400000, guid: 18df80bde6c0459786ef94f09d66b632, type: 2}

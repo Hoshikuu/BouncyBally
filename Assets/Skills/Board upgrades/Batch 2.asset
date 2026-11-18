@@ -24,5 +24,5 @@ MonoBehaviour:
   costGrowth: 1
   maxLevel: 1
   position: {x: 0.2737758, y: 0.49249548}
-  prerequisite: {fileID: 11400000, guid: 2d362001c7e543f1b7accd9becd22720, type: 2}
+  prerequisite: {fileID: 0}
   prerequisiteLevel: 1

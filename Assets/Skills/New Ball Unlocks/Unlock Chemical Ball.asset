@@ -23,6 +23,6 @@ MonoBehaviour:
   firstCost: 375
   costGrowth: 2.645
   maxLevel: 1
-  position: {x: 0.242, y: 0.94}
+  position: {x: 0.24174415, y: 0.9401649}
   prerequisite: {fileID: 0}
   prerequisiteLevel: 1
