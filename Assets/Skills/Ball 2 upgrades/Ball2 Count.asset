@@ -16,14 +16,13 @@ MonoBehaviour:
   title: 'Ball 2 Count '
   description: +1 Ball 2
   effect: 1
-  targetBalls:
-  - {fileID: 11400000, guid: 81fa011be8144aab9d6d1fe947fe8916, type: 2}
+  targetBalls: []
   unlockBall: {fileID: 0}
   customAction: {fileID: 0}
   amountPerLevel: 1
   firstCost: 12
   costGrowth: 2
   maxLevel: 2
-  position: {x: 0.33507347, y: 0.651017}
+  position: {x: 0.3354493, y: 0.6513493}
   prerequisite: {fileID: 11400000, guid: bf58153483f52940da1d3c6168e5a7d8, type: 2}
   prerequisiteLevel: 1

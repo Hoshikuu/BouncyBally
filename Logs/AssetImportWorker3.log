@@ -273,3 +273,99 @@ Received Import Request.
 Start importing Assets/TextMesh Pro/Resources/Fonts & Materials/Roboto-Bold SDF.asset using Guid(5302535af1044152a457ed104f1f4b91) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '178581b0f555d1625c35437361e9d826') in 0.042614299 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
 
+========================================================================
+Received Import Request.
+  Time since last request: 706.153886 seconds.
+  path: Assets/Skills/Ball 2 upgrades/Ball2 Count.asset
+  artifactKey: Guid(ae934f64662dafc24869ba01d5b0de6e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Skills/Ball 2 upgrades/Ball2 Count.asset using Guid(ae934f64662dafc24869ba01d5b0de6e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '120203c8fd6f9434dca6c6ace82f1842') in 0.005315872 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.006987 seconds.
+  path: Assets/Skills/Ball 3 upgrades/Ball 3 Speed 2.asset
+  artifactKey: Guid(51b6659c21eefaa79bc1973cf1cd2265) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Skills/Ball 3 upgrades/Ball 3 Speed 2.asset using Guid(51b6659c21eefaa79bc1973cf1cd2265) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'e7a70b72aaac34a3c4794c608b08ef34') in 0.002354605 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Resources/BouncyBallySettings.asset
+  artifactKey: Guid(b1ad07c7d24b43b6ad0b65e14a418ce1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Resources/BouncyBallySettings.asset using Guid(b1ad07c7d24b43b6ad0b65e14a418ce1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '9316d2172b13c6849e0bf36f1dff0267') in 0.009739526 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 144
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Skills/Ball 3 upgrades/Ball 3 Count.asset
+  artifactKey: Guid(edc37177e8603473f9f2535063f1bd6d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Skills/Ball 3 upgrades/Ball 3 Count.asset using Guid(edc37177e8603473f9f2535063f1bd6d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'c239dc3afc8c9209ab094a84392e536d') in 0.002266492 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000008 seconds.
+  path: Assets/Skills/Ball 3 upgrades/Ball 3 Speed.asset
+  artifactKey: Guid(b1de8a5ef8ec40c978fb91c7a28921a2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Skills/Ball 3 upgrades/Ball 3 Speed.asset using Guid(b1de8a5ef8ec40c978fb91c7a28921a2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '15743885dce80731deb088613494cb07') in 0.002034573 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 196.519952 seconds.
+  path: Assets/Skills/Board upgrades/Workshop.asset
+  artifactKey: Guid(ada515f3f9754f4e9c9063f00b407515) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Skills/Board upgrades/Workshop.asset using Guid(ada515f3f9754f4e9c9063f00b407515) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '13cc99151db4185268c4a9ebf02b0ce8') in 0.011932479 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 20
+
+========================================================================
+Received Import Request.
+  Time since last request: 111.695341 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(8c9cfa26abfee488c85f1582747f6a02) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scenes/SampleScene.unity using Guid(8c9cfa26abfee488c85f1582747f6a02) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a740d39f4b0340acfe7cd9f994de8503') in 0.010923576 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.199923 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(8c9cfa26abfee488c85f1582747f6a02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleScene.unity using Guid(8c9cfa26abfee488c85f1582747f6a02) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd57ceca7ff5b8b45b466da455f2384b2') in 0.000394485 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.039635 seconds.
+  path: Assets/Skills/Board upgrades/Batch 2.asset
+  artifactKey: Guid(c066470712cb4b84ba2082a6c3be7bdc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Skills/Board upgrades/Batch 2.asset using Guid(c066470712cb4b84ba2082a6c3be7bdc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '7922ef4f397718bdbfa622367171d25c') in 0.002066776 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.012694 seconds.
+  path: Assets/Skills/Board upgrades/Batch 3.asset
+  artifactKey: Guid(1b2f93e3e43d4043a633a2806a2da52e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Skills/Board upgrades/Batch 3.asset using Guid(1b2f93e3e43d4043a633a2806a2da52e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'cfd0aabaad077e7d055dc70acce49dc5') in 0.002103688 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Skills/Board upgrades/Batch 4.asset
+  artifactKey: Guid(55724487d2a24611b1f3d2a3ef8970d0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Skills/Board upgrades/Batch 4.asset using Guid(55724487d2a24611b1f3d2a3ef8970d0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'e971c30a2b2437e2af3cce9da9d6311a') in 0.002091299 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Skills/Board upgrades/Workshop.asset
+  artifactKey: Guid(ada515f3f9754f4e9c9063f00b407515) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Skills/Board upgrades/Workshop.asset using Guid(ada515f3f9754f4e9c9063f00b407515) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '8d99791311609c5d6d80d97b4ee066bf') in 0.001962712 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+

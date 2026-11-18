@@ -17,7 +17,6 @@ MonoBehaviour:
   sizeFactor: 1.2
   bounceFactor: 1
   contacts: 1
-  repeatContactChance: 1
   flatPinBonus: 0
   pinBonusFactor: 1
   rewardFactor: 2

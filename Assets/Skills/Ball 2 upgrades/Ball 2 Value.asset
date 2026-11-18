@@ -16,8 +16,7 @@ MonoBehaviour:
   title: Ball 2 Value
   description: +1 Lucky Ball Value
   effect: 0
-  targetBalls:
-  - {fileID: 11400000, guid: 81fa011be8144aab9d6d1fe947fe8916, type: 2}
+  targetBalls: []
   unlockBall: {fileID: 0}
   customAction: {fileID: 0}
   amountPerLevel: 1

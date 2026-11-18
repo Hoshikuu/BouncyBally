@@ -16,8 +16,7 @@ MonoBehaviour:
   title: Ball 3 Speed 2
   description: Increases the Ball 3 Speed
   effect: 2
-  targetBalls:
-  - {fileID: 11400000, guid: 99ba487eea2d419f861e01d6769fbb5e, type: 2}
+  targetBalls: []
   unlockBall: {fileID: 0}
   customAction: {fileID: 0}
   amountPerLevel: 0.3

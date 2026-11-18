@@ -15,9 +15,6 @@ MonoBehaviour:
   gameTitle: Bouncy Bally
   balls:
   - {fileID: 11400000, guid: ea91270112ae49cb96522ac8ce891682, type: 2}
-  - {fileID: 11400000, guid: 81fa011be8144aab9d6d1fe947fe8916, type: 2}
-  - {fileID: 11400000, guid: d84634489a194280bca3211cca416e2b, type: 2}
-  - {fileID: 11400000, guid: 99ba487eea2d419f861e01d6769fbb5e, type: 2}
   - {fileID: 11400000, guid: 927f8a4492aa4bd98eafe0249f44711c, type: 2}
   - {fileID: 11400000, guid: 02cdd2eaf2274e5c997b25dab342aa44, type: 2}
   - {fileID: 11400000, guid: 8f15c1d091c54a20a13ffbd96d27c319, type: 2}
@@ -47,7 +44,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7bff4970bd640bdb582fbdd3d347afd, type: 2}
   - {fileID: 11400000, guid: 6deffe341bf484c6ea0f7675ebe701ee, type: 2}
   - {fileID: 11400000, guid: ada515f3f9754f4e9c9063f00b407515, type: 2}
-  - {fileID: 11400000, guid: a58fe913b3fd45b0a46d7b8d31d97fea, type: 2}
   - {fileID: 11400000, guid: ce1d11dc8b2142a8b3ea4515dd05c8a3, type: 2}
   - {fileID: 11400000, guid: 790a0e6b4e82422bb013d53d60ac217c, type: 2}
   - {fileID: 11400000, guid: 58906e535de14bdaa965f715a7005d57, type: 2}
